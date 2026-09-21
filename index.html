@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="th" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAFS Group • Executive Talent Calibration 2027</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'Prompt', 'sans-serif'],
+            display: ['Inter', '"Plus Jakarta Sans"', 'Prompt', 'sans-serif'],
+            prompt: ['Prompt', 'sans-serif']
+          },
+          colors: {
+            bafs: {
+              navy: '#030d1a',
+              deep: '#06152b',
+              royal: '#005691',
+              azure: '#0284c7',
+              cyan: '#38bdf8',
+              gold: '#f59e0b',
+              goldLight: '#fbbf24',
+              goldHover: '#fde047'
+            }
+          },
+          animation: {
+            'spotlight-pulse': 'spotlightPulse 7s ease-in-out infinite',
+            'ambient-float': 'ambientFloat 8s ease-in-out infinite',
+            'modal-pop': 'modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'blur-fade-up': 'blurFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+          },
+          keyframes: {
+            spotlightPulse: {
+              '0%, 100%': { opacity: '0.85', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.03)' }
+            },
+            ambientFloat: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            modalPop: {
+              '0%': { opacity: '0', transform: 'scale(0.96)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            },
+            blurFadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(16px)', filter: 'blur(8px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- React 18 & Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* ============================================================ */
+    /* EXECUTIVE CINEMATIC LIGHTING & FROSTED GLASS TOKEN SYSTEM    */
+    /* ============================================================ */
+    .liquid-glass {
+      background: rgba(8, 22, 45, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    
+    .liquid-glass-gold {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(6, 21, 43, 0.85) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .liquid-glass-card {
+      background: rgba(5, 18, 38, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .liquid-glass-card:hover {
+      background: rgba(8, 26, 56, 0.85);
+      border-color: rgba(245, 158, 11, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Optical Blur Overlay */
+    .bottom-blur-overlay {
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      -webkit-mask-image: linear-gradient(to top, black 0%, transparent 45%);
+      mask-image: linear-gradient(to top, black 0%, transparent 45%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', 'Prompt', sans-serif;
+      color: #f8fafc;
+      min-height: 100vh;
+      background-color: #030d1a;
+      overflow-x: hidden;
+    }
+
+    /* EXECUTIVE TALENT HORIZON BACKGROUND (MUTED 16% & ATMOSPHERIC BOKEH) */
+    .talent-spotlight-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url('./assets/bg-executive-vision.jpg');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+      filter: blur(3px) brightness(0.75) contrast(1.05);
+      transform: scale(1.04);
+      transition: opacity 1.2s ease, filter 1.2s ease;
+    }
+
+    /* CINEMATIC KEN BURNS HORIZON DRIFT (POST-LOGIN & AMBIENT) */
+    @keyframes cinematicHorizonDrift {
+      0% {
+        transform: scale(1.03) translate(0px, 0px);
+        filter: blur(2.8px) brightness(0.75) contrast(1.06);
+      }
+      50% {
+        transform: scale(1.07) translate(-1.2%, -0.8%);
+        filter: blur(2.2px) brightness(0.82) contrast(1.08);
+      }
+      100% {
+        transform: scale(1.03) translate(0px, 0px);
+        filter: blur(2.8px) brightness(0.75) contrast(1.06);
+      }
+    }
+
+    .talent-spotlight-bg.has-motion {
+      animation: cinematicHorizonDrift 28s ease-in-out infinite alternate;
+      will-change: transform, filter;
+    }
+
+    /* ATMOSPHERIC VOLUMETRIC AURORA WAVE PULSE */
+    @keyframes auroraWavePulse {
+      0% {
+        transform: rotate(0deg) scale(1) translate(0px, 0px);
+        opacity: 0.08;
+      }
+      50% {
+        transform: rotate(3deg) scale(1.08) translate(20px, -12px);
+        opacity: 0.15;
+      }
+      100% {
+        transform: rotate(0deg) scale(1) translate(0px, 0px);
+        opacity: 0.08;
+      }
+    }
+
+    .aurora-motion-wave {
+      position: fixed;
+      inset: -15%;
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(ellipse at 65% 45%, rgba(2, 132, 199, 0.18) 0%, rgba(245, 158, 11, 0.05) 35%, transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+      animation: auroraWavePulse 24s ease-in-out infinite alternate;
+      will-change: transform, opacity;
+    }
+
+    /* ASYMMETRIC OBSIDIAN READING POCKET (PUNCHY TEXT CONTRAST) */
+    .spotlight-beam-veil {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        90deg, 
+        rgba(2, 8, 20, 0.95) 0%, 
+        rgba(2, 8, 20, 0.85) 45%, 
+        rgba(2, 8, 20, 0.45) 80%,
+        rgba(2, 8, 20, 0.70) 100%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* SUBTLE GOLDEN AURA ON RIGHT STAGE ONLY */
+    .golden-aura-veil {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 75% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* FLOATING TYPOGRAPHY & ELEVATION SHADOWS */
+    .floating-text-shadow {
+      text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.9),
+        0 8px 24px rgba(0, 0, 0, 0.95),
+        0 16px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    .floating-badge-shadow {
+      box-shadow: 
+        0 4px 16px -2px rgba(0, 0, 0, 0.7),
+        0 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    /* VISIONOS PRO FROSTED CRYSTAL GLASS FOR LOGIN */
+    .glass-3d-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), rgba(7, 18, 38, 0.65);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-top: 1px solid rgba(255, 255, 255, 0.38);
+      border-left: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 1.75rem;
+      box-shadow: 
+        0 35px 70px -15px rgba(0, 0, 0, 0.88),
+        0 12px 28px -5px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.28);
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    /* Interactive Specular Spotlight Sheen that tracks cursor */
+    .glass-spotlight-sheen {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        500px circle at var(--sheen-x, 50%) var(--sheen-y, 30%), 
+        rgba(56, 189, 248, 0.14), 
+        transparent 65%
+      );
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    /* Sculpted Glass Wells for Inputs */
+    .glass-3d-input {
+      background: rgba(4, 13, 27, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-3d-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.32), inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      background: rgba(6, 20, 42, 0.9);
+    }
+
+    /* Custom Scrollbar for Studio */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(245, 158, 11, 0.5);
+    }
+
+    /* Horizontal Reel Scrollbar */
+    .reel-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(245, 158, 11, 0.4) transparent;
+    }
+    .reel-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .reel-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .reel-scroll::-webkit-scrollbar-thumb {
+      background: rgba(245, 158, 11, 0.35);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="relative antialiased selection:bg-sky-600 selection:text-white">
+
+  <!-- ============================================================ -->
+  <!-- LAYER 0: CLEAN EXECUTIVE TALENT HORIZON BACKGROUND           -->
+  <!-- ZERO TEXT • VISIONARY EXECUTIVE SILHOUETTE & ORBITAL RINGS   -->
+  <!-- ============================================================ -->
+  <div id="talent-spotlight-bg" class="talent-spotlight-bg"></div>
+  <div class="aurora-motion-wave"></div>
+  <div class="spotlight-beam-veil"></div>
+  <div class="golden-aura-veil"></div>
+
+  <!-- Talent Constellation Dynamic Interactive Canvas -->
+  <canvas id="talent-constellation-canvas" class="fixed inset-0 pointer-events-none z-0" style="opacity: 0.88;"></canvas>
+
+  <!-- Ambient Light Auras (Deep Sapphire Tint & Subtle Azure Accent) -->
+  <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[48rem] h-[36rem] bg-indigo-950/25 rounded-full blur-[120px] pointer-events-none z-0"></div>
+  <div class="fixed top-1/3 right-1/4 w-[36rem] h-[32rem] bg-sky-600/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 1: BOTTOM OPTICAL BLUR OVERLAY (NO DARK GRADIENT)     -->
+  <!-- ============================================================ -->
+  <div class="bottom-blur-overlay"></div>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 2: ROOT REACT APPLICATION (Z-INDEX 10)                 -->
+  <!-- ============================================================ -->
+  <div id="root" class="relative z-10"></div>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useRef } = React;
+
+    // ==========================================
+    // 1. DATA LAYER: 8 EVALUATORS + 1 ADMIN
+    // STRICT PASSWORDS ONLY
+    // ==========================================
+    const EVALUATORS = [
+      { id: 'kanit', name: 'Kanit Seetong', email: 'kanit@bafs.co.th', password: 'bafsazKS2026', department: 'AZ', company: 'BAFS', role: 'Vice President / Head of AZ', assignedCount: 4 },
+      { id: 'theerata', name: 'Theerata Thornjaroensri', email: 'theerata@bafs.co.th', password: 'bafsfaTT2026', department: 'FA', company: 'BAFS', role: 'Head of FA', assignedCount: 2 },
+      { id: 'rachanok', name: 'Rachanok Sa-nguansub', email: 'rachanok@bafs.co.th', password: 'bafshbRS2026', department: 'HZ', company: 'BAFS', role: 'Head of HZ', assignedCount: 1 },
+      { id: 'yuphadee', name: 'Yuphadee Tongaroonsri', email: 'yuphadee@bafs.co.th', password: 'bafsrzYT2026', department: 'RZ', company: 'BAFS', role: 'Head of RZ', assignedCount: 1 },
+      { id: 'narongsak', name: 'Narongsak Poonpanichuppatamp', email: 'narongsak.p@bpt.co.th', emailAlt: 'narongsak@bpt.co.th', password: 'bptmqNP2026', department: 'MD', company: 'BPT', role: 'Managing Director / Head of MD', assignedCount: 2 },
+      { id: 'worawee', name: 'Worawee Suriyathamrongkul', email: 'worawee.s@bpt.co.th', emailAlt: 'worawee@bpt.co.th', password: 'bpthzWS2026', department: 'HZ', company: 'BPT', role: 'Head of HZ (BPT)', assignedCount: 1 },
+      { id: 'winyu', name: 'Winyu Yongsuebchat', email: 'winyu.y@bpt.co.th', emailAlt: 'winyu@bpt.co.th', password: 'bptpzWY2026', department: 'PZ', company: 'BPT', role: 'Head of PZ', assignedCount: 1 },
+      { id: 'suwatchai', name: 'Suwatchai Patcharasaengthong', email: 'suwatchai.p@bpt.co.th', emailAlt: 'suwatchai@bpt.co.th', password: 'bptdzSP2026', department: 'DZ', company: 'BPT', role: 'Head of DZ', assignedCount: 2 },
+      { id: 'admin', name: 'Super Administrator', email: 'admin@bafs.co.th', password: 'admin2026', passwords: ['admin2026', 'admin2027', 'Admin#2027', 'admin#2027', 'Admin2026', 'Admin2027'], department: 'Talent Management', company: 'BAFS Group', role: 'Talent Management Administrator', assignedCount: 14, isAdmin: true }
+    ];
+
+    // 14 Targeted Talents (ENGLISH NAMES ONLY - NO EMPLOYEE CODES - NO BULKY DESCRIPTIONS)
+    const CANDIDATES = [
+      { id: 'cand_1', fullName: 'Chitakon Prasomsi', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 49, serviceYears: 23, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
+      { id: 'cand_2', fullName: 'Pakasit Promnim', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 43, serviceYears: 16, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
+      { id: 'cand_3', fullName: 'Veerawat Limphatcharaphon', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 41, serviceYears: 14, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
+      { id: 'cand_4', fullName: 'Ladapha Siripodjanakorn', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 38, serviceYears: 3, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
+      { id: 'cand_5', fullName: 'Khwannapa Thongdonae', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 44, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
+      { id: 'cand_6', fullName: 'Thanawan Sanansongkram', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 31, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
+      { id: 'cand_7', fullName: 'Sangduan Tipworapong', department: 'HZ', departmentFull: 'ฝ่ายทรัพยากรบุคคล (HZ)', company: 'BAFS', age: 38, serviceYears: 15, assignedEvaluatorIds: ['rachanok', 'admin'], evaluatorEmail: 'rachanok@bafs.co.th' },
+      { id: 'cand_8', fullName: 'Atsadayuth Rodchaona', department: 'RZ', departmentFull: 'ฝ่ายวิจัยและนวัตกรรมธุรกิจ (RZ)', company: 'BAFS', age: 44, serviceYears: 13, assignedEvaluatorIds: ['yuphadee', 'admin'], evaluatorEmail: 'yuphadee@bafs.co.th' },
+      { id: 'cand_9', fullName: 'Panyamol Gradwong', department: 'MD', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MD)', company: 'BPT', age: 41, serviceYears: 12, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
+      { id: 'cand_10', fullName: 'Sununtha Phumsrithon', department: 'MD', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MD)', company: 'BPT', age: 35, serviceYears: 7, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
+      { id: 'cand_11', fullName: 'Kadsarin Inmano', department: 'HZ', departmentFull: 'ฝ่ายบริหารงานบุคคลและองค์กร (HZ)', company: 'BPT', age: 29, serviceYears: 4, assignedEvaluatorIds: ['worawee', 'admin'], evaluatorEmail: 'worawee.s@bpt.co.th', evaluatorEmailAlt: 'worawee@bpt.co.th' },
+      { id: 'cand_12', fullName: 'Pornthep KongKaew', department: 'PZ', departmentFull: 'ฝ่ายวิศวกรรมระบบท่อ (PZ)', company: 'BPT', age: 49, serviceYears: 27, assignedEvaluatorIds: ['winyu', 'admin'], evaluatorEmail: 'winyu.y@bpt.co.th', evaluatorEmailAlt: 'winyu@bpt.co.th' },
+      { id: 'cand_13', fullName: 'Warid Intachai', department: 'DZ', departmentFull: 'ฝ่ายควบคุมคลังน้ำมัน (DZ)', company: 'BPT', age: 43, serviceYears: 16, assignedEvaluatorIds: ['suwatchai', 'admin'], evaluatorEmail: 'suwatchai.p@bpt.co.th', evaluatorEmailAlt: 'suwatchai@bpt.co.th' },
+      { id: 'cand_14', fullName: 'Mongkol Weingsong', department: 'DZ', departmentFull: 'ฝ่ายควบคุมคลังน้ำมัน (DZ)', company: 'BPT', age: 39, serviceYears: 17, assignedEvaluatorIds: ['suwatchai', 'admin'], evaluatorEmail: 'suwatchai.p@bpt.co.th', evaluatorEmailAlt: 'suwatchai@bpt.co.th' }
+    ];
+
+    // =========================================================================
+    // 2. CRITERIA LAYER: EXACT GOOGLE SHEET (100% WORD-FOR-WORD)
+    // 4 DIMENSIONS • 12 QUESTIONS • 5 RATING TIERS
+    // =========================================================================
+    const DIMENSIONS = [
+      {
+        id: 'dim1',
+        number: 1,
+        title: '1. Leadership Promise',
+        icon: '👑',
+        description: 'การแสดงบทบาทนำเมื่อเผชิญสถานการณ์ท้าทาย การสร้างความน่าเชื่อถือ และการสนับสนุนพัฒนาศักยภาพผู้อื่น',
+        questions: [
+          { number: 1, title: 'มักก้าวเข้ามารับผิดชอบหรือช่วยนำทีมเมื่อเกิดความท้าทาย' },
+          { number: 2, title: 'สามารถสร้างความน่าเชื่อถือและทำให้ผู้อื่นอยากร่วมงานด้วย' },
+          { number: 3, title: 'สนับสนุนและช่วยพัฒนาศักยภาพของผู้อื่น' }
+        ]
+      },
+      {
+        id: 'dim2',
+        number: 2,
+        title: '2. Balance of Value and Results',
+        icon: '⚖️',
+        description: 'การขับเคลื่อนผลลัพธ์ให้สำเร็จตามเป้าหมาย สอดคล้องกับค่านิยม GROUP และสร้างสมดุลการทำงานร่วมกับผู้อื่น',
+        questions: [
+          { number: 4, title: 'ผลักดันงานให้สำเร็จแม้มีอุปสรรค' },
+          { number: 5, title: 'มีพฤติกรรมสอดคล้องกับค่านิยมองค์กร (GROUP)' },
+          { number: 6, title: 'สร้างสมดุลระหว่าง “ผลลัพธ์” และ “การทำงานร่วมกับผู้อื่น”' }
+        ]
+      },
+      {
+        id: 'dim3',
+        number: 3,
+        title: '3. Personal Development Orientation',
+        icon: '🌱',
+        description: 'การเปิดรับ feedback นำไปปรับใช้จริง เรียนรู้สิ่งใหม่ได้รวดเร็ว และมุ่งมั่นเรียนรู้เกินกว่าขอบเขตงานปัจจุบัน',
+        questions: [
+          { number: 7, title: 'เปิดรับ feedback และนำไปปรับใช้จริง' },
+          { number: 8, title: 'เรียนรู้สิ่งใหม่ได้รวดเร็ว' },
+          { number: 9, title: 'สนใจเรียนรู้เกินกว่าหน้าที่ปัจจุบัน' }
+        ]
+      },
+      {
+        id: 'dim4',
+        number: 4,
+        title: '4. Mastery of Complexity',
+        icon: '🧭',
+        description: 'การปรับตัวต่อความเปลี่ยนแปลง การตัดสินใจบนข้อมูลที่ไม่ครบถ้วน และการมองภาพรวมวิเคราะห์ปัญหาซับซ้อน',
+        questions: [
+          { number: 10, title: 'ปรับตัวได้ดีเมื่อเกิดการเปลี่ยนแปลง' },
+          { number: 11, title: 'สามารถตัดสินใจได้แม้ข้อมูลไม่ครบถ้วน' },
+          { number: 12, title: 'มองภาพรวมและวิเคราะห์ปัญหาซับซ้อนได้ดี' }
+        ]
+      }
+    ];
+
+    const RATING_SCALE = [
+      { 
+        value: 1, 
+        label: '1 - ไม่เห็นด้วยเลย', 
+        desc: 'ไม่เห็นด้วยเลย / ไม่เคยแสดงพฤติกรรมเลย', 
+        short: 'ไม่เห็นด้วยเลย',
+        activeGlow: 'border-amber-400 bg-amber-500/25 ring-2 ring-amber-400' 
+      },
+      { 
+        value: 2, 
+        label: '2 - ไม่ค่อยเห็นด้วย', 
+        desc: 'ไม่ค่อยเห็นด้วย / แสดงพฤติกรรมเป็นบางครั้ง ยังไม่สม่ำเสมอ', 
+        short: 'ไม่ค่อยเห็นด้วย',
+        activeGlow: 'border-amber-400 bg-amber-500/25 ring-2 ring-amber-400' 
+      },
+      { 
+        value: 3, 
+        label: '3 - เฉยๆ', 
+        desc: 'เฉยๆ / แสดงพฤติกรรมตามมาตรฐาน', 
+        short: 'เฉยๆ',
+        activeGlow: 'border-amber-400 bg-amber-500/25 ring-2 ring-amber-400' 
+      },
+      { 
+        value: 4, 
+        label: '4 - เห็นด้วย', 
+        desc: 'เห็นด้วย / แสดงพฤติกรรมชัดเจนในหลายสถานการณ์', 
+        short: 'เห็นด้วย',
+        activeGlow: 'border-amber-400 bg-amber-500/25 ring-2 ring-amber-400' 
+      },
+      { 
+        value: 5, 
+        label: '5 - เห็นด้วยอย่างยิ่ง', 
+        desc: 'เห็นด้วยอย่างยิ่ง / แสดงพฤติกรรมอย่างสม่ำเสมอ โดดเด่นมาก', 
+        short: 'เห็นด้วยอย่างยิ่ง',
+        activeGlow: 'border-amber-400 bg-amber-500/25 ring-2 ring-amber-400' 
+      }
+    ];
+
+    // Score calculation
+    function calculateScore(scores = {}) {
+      let rawScore = 0;
+      let answeredCount = 0;
+      for (let i = 1; i <= 12; i++) {
+        const val = Number(scores[`q${i}`]);
+        if (val && val >= 1 && val <= 5) {
+          rawScore += val;
+          answeredCount++;
+        }
+      }
+
+      const percentage = answeredCount > 0 ? Number(((rawScore / 60) * 100).toFixed(2)) : 0;
+      let potentialTier = 'Low Potential';
+      let tierColor = 'text-slate-300 bg-slate-800/80 border-slate-600';
+      if (percentage >= 80) {
+        potentialTier = 'High Potential (Talent Pool)';
+        tierColor = 'text-amber-300 bg-amber-500/20 border-amber-400/50';
+      } else if (percentage >= 60) {
+        potentialTier = 'Medium Potential (Promising)';
+        tierColor = 'text-blue-300 bg-blue-500/20 border-blue-400/50';
+      }
+
+      const dimScores = {
+        dim1: (Number(scores.q1 || 0) + Number(scores.q2 || 0) + Number(scores.q3 || 0)) / 3,
+        dim2: (Number(scores.q4 || 0) + Number(scores.q5 || 0) + Number(scores.q6 || 0)) / 3,
+        dim3: (Number(scores.q7 || 0) + Number(scores.q8 || 0) + Number(scores.q9 || 0)) / 3,
+        dim4: (Number(scores.q10 || 0) + Number(scores.q11 || 0) + Number(scores.q12 || 0)) / 3
+      };
+
+      return {
+        rawScore,
+        maxScore: 60,
+        percentage,
+        potentialTier,
+        tierColor,
+        answeredCount,
+        isComplete: answeredCount === 12,
+        dimScores
+      };
+    }
+
+    // =========================================================================
+    // 3. EXECUTIVE ASSESSMENT MODAL (PROMINENT CANDIDATE + 12-QUESTION MATRIX)
+    // =========================================================================
+    function AssessmentModal({ candidate, initialEvaluation, isLocked, isAdmin, onSave, onReset, onClose }) {
+      const [scores, setScores] = useState(initialEvaluation?.scores || {});
+      const [notes, setNotes] = useState(initialEvaluation?.notes || '');
+
+      const isReadOnly = Boolean(isLocked && !isAdmin);
+
+      const answeredCount = Object.values(scores).filter(v => Number(v) >= 1 && Number(v) <= 5).length;
+      const isComplete = answeredCount === 12;
+      const completionPct = Math.round((answeredCount / 12) * 100);
+
+      const handleScoreSelect = (questionNum, val) => {
+        if (isReadOnly) return;
+        setScores(prev => ({ ...prev, [`q${questionNum}`]: val }));
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isReadOnly) return;
+        if (!isComplete && !isAdmin) {
+          alert('กรุณาตอบแบบประเมินให้ครบทั้ง 12 ข้อ ก่อนส่งผลการประเมิน');
+          return;
+        }
+        onSave(candidate.id, scores, notes);
+      };
+
+      const stats = calculateScore(scores);
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/90 backdrop-blur-2xl overflow-y-auto">
+          <div className="w-full max-w-5xl bg-slate-900/95 rounded-3xl sm:rounded-[36px] shadow-2xl border border-white/20 flex flex-col max-h-[96vh] overflow-hidden my-auto animate-modal-pop text-white relative">
+            
+            {/* Top HUD Bar */}
+            <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-white/[0.03] backdrop-blur-md flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase whitespace-nowrap">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  BAFS TALENT 2027 • แบบประเมินศักยภาพบุคคล
+                </span>
+                {isReadOnly && (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-400/40 text-[10px] font-bold">
+                    <span>🔒 LOCKED</span>
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-xs font-bold whitespace-nowrap">
+                    ความคืบหน้า: <span className={isComplete ? 'text-emerald-400 font-black' : 'text-amber-400 font-black'}>{completionPct}%</span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 whitespace-nowrap">
+                    ตอบแล้ว {answeredCount} / 12 ข้อ
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors border border-white/10 cursor-pointer"
+                  title="ปิดหน้าต่าง"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Scrollable Body */}
+            <div className="flex-1 overflow-y-auto custom-scroll p-4 sm:p-6 lg:p-8 space-y-6">
+              
+              {/* LOCKED NOTICE FOR EVALUATORS */}
+              {isReadOnly && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-amber-500/15 border-2 border-amber-400/60 text-amber-100 flex items-start gap-3.5 shadow-xl animate-blur-fade-up">
+                  <div className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/50 text-amber-300 flex items-center justify-center text-xl flex-shrink-0 mt-0.5 shadow-sm">
+                    🔒
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-sm font-black text-white flex items-center gap-2">
+                      <span>ผลการประเมินถูกส่งเข้าระบบเรียบร้อยแล้ว (ระบบล็อคตามระเบียบ)</span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[10px] font-bold">บันทึกแล้ว</span>
+                    </div>
+                    <p className="text-xs text-amber-200 leading-relaxed font-medium">
+                      ท่านสามารถตรวจสอบคะแนนและข้อคิดเห็นที่เคยบันทึกไว้ได้ แต่ไม่สามารถแก้ไขผลการประเมินได้ หากท่านมีความจำเป็นต้องแก้ไขคะแนน กรุณาติดต่อทีมงาน HOD
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ============================================================== */}
+              {/* 1. PROMINENT CANDIDATE PROFILE BANNER (ทำให้รายคนเด่นกว่านี้) */}
+              {/* ============================================================== */}
+              <div className="p-6 sm:p-8 rounded-3xl liquid-glass-gold border border-amber-400/40 shadow-2xl relative overflow-hidden">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  
+                  <div className="flex items-start sm:items-center gap-5">
+                    {/* Big Company Crest Avatar */}
+                    <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center font-black text-white text-xl sm:text-2xl shadow-xl flex-shrink-0 border border-white/20 ${
+                      candidate.company === 'BAFS' ? 'bg-gradient-to-br from-bafs-royal to-blue-950' : 'bg-gradient-to-br from-teal-600 to-teal-950'
+                    }`}>
+                      {candidate.company}
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-black px-3.5 py-1.5 rounded-xl bg-amber-400/25 text-amber-300 border border-amber-400/50 whitespace-nowrap shadow-xs">
+                          {candidate.company} • {candidate.department}
+                        </span>
+                        <span className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-slate-950/80 text-white border border-white/20 whitespace-nowrap shadow-xs">
+                          {candidate.departmentFull}
+                        </span>
+                        <span className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-slate-950/80 text-slate-100 border border-white/20 whitespace-nowrap shadow-xs">
+                          อายุ {candidate.age} ปี • อายุงาน {candidate.serviceYears} ปี
+                        </span>
+                      </div>
+
+                      {/* HUGE PROMINENT CANDIDATE NAME */}
+                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight pt-0.5 leading-tight font-display floating-text-shadow">
+                        {candidate.fullName}
+                      </h2>
+                    </div>
+                  </div>
+
+                  {/* Right Score Progress Pill */}
+                  <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center p-4 rounded-2xl bg-black/40 border border-white/15 min-w-[180px]">
+                    <div className="text-left md:text-right">
+                      <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">คะแนนรวมปัจจุบัน</div>
+                      <div className="text-2xl sm:text-3xl font-black text-amber-400">
+                        {stats.rawScore} <span className="text-sm font-normal text-slate-400">/ 60</span>
+                      </div>
+                    </div>
+                    <div className="text-right md:pt-1">
+                      <span className={`inline-block text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
+                        isComplete ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40' : 'bg-amber-500/20 text-amber-300 border-amber-400/40'
+                      }`}>
+                        {isComplete ? 'ประเมินครบ 12 ข้อ' : `เหลือ ${12 - answeredCount} ข้อ`}
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* ============================================================== */}
+              {/* 2. OVERVIEW MATRIX: ALL 12 QUESTIONS GROUPED BY 4 DIMENSIONS   */}
+              {/* ============================================================== */}
+              <div className="space-y-8 pt-2">
+                {DIMENSIONS.map((dim) => (
+                  <div key={dim.id} className="space-y-4">
+                    
+                    {/* Dimension Header Banner */}
+                    <div className="p-4 sm:p-5 rounded-2xl liquid-glass border border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-lg">
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl sm:text-3xl">{dim.icon}</span>
+                        <div>
+                          <h3 className="text-base sm:text-lg font-black text-white tracking-wide">
+                            {dim.title}
+                          </h3>
+                          <p className="text-xs text-slate-300 font-light mt-0.5">
+                            {dim.description}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-bold text-amber-400 bg-amber-500/15 border border-amber-400/30 px-3 py-1 rounded-xl self-start sm:self-center whitespace-nowrap">
+                        มิติที่ {dim.number}
+                      </span>
+                    </div>
+
+                    {/* Questions in this Dimension */}
+                    <div className="space-y-4">
+                      {dim.questions.map((q) => {
+                        const currentVal = scores[`q${q.number}`];
+                        const matchedRating = RATING_SCALE.find(r => r.value === Number(currentVal));
+                        const isAnswered = Number(currentVal) >= 1;
+
+                        return (
+                          <div
+                            key={q.number}
+                            id={`q-${q.number}`}
+                            className={`p-5 sm:p-6 rounded-3xl transition-all border space-y-4 shadow-lg ${
+                              isAnswered 
+                                ? 'bg-slate-950/85 border-amber-400/40' 
+                                : 'bg-slate-950/70 border-white/10 hover:border-white/20'
+                            }`}
+                          >
+                            {/* Question Title Bar */}
+                            <div className="flex items-start gap-3.5">
+                              <span className="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-black flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                                {q.number}
+                              </span>
+                              <div className="flex-1">
+                                <div className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
+                                  คำถามข้อที่ {q.number}
+                                </div>
+                                <h4 className="text-base sm:text-lg font-bold text-white leading-relaxed mt-0.5">
+                                  {q.title}
+                                </h4>
+                              </div>
+                              {isAnswered ? (
+                                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs font-bold whitespace-nowrap">
+                                  <span>ให้แล้ว {currentVal} คะแนน</span>
+                                </span>
+                              ) : (
+                                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-slate-400 border border-white/10 text-xs whitespace-nowrap">
+                                  <span>ยังไม่ได้ให้คะแนน</span>
+                                </span>
+                              )}
+                            </div>
+
+                            {/* 5-Rating Selection Buttons */}
+                            <div className="space-y-2 pt-1">
+                              <div className="grid grid-cols-5 gap-2 sm:gap-3">
+                                  {RATING_SCALE.map((lvl) => {
+                                    const isSelected = Number(currentVal) === lvl.value;
+
+                                    return (
+                                      <button
+                                        key={lvl.value}
+                                        type="button"
+                                        disabled={isReadOnly}
+                                        onClick={() => handleScoreSelect(q.number, lvl.value)}
+                                        className={`py-3 sm:py-3.5 px-2 rounded-2xl text-center transition-all duration-200 border flex flex-col items-center justify-center ${
+                                          isReadOnly ? 'cursor-default' : 'cursor-pointer'
+                                        } ${
+                                          isSelected
+                                            ? 'bg-amber-400 text-slate-950 font-black border-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.45)] ring-2 ring-amber-400 transform scale-[1.02]'
+                                            : isReadOnly
+                                              ? 'bg-slate-950/40 border-white/5 text-slate-500 opacity-60'
+                                              : 'bg-slate-900/80 hover:bg-slate-800 border-white/15 hover:border-white/30 text-slate-200'
+                                        }`}
+                                      >
+                                        <div className={`text-base sm:text-lg font-black ${isSelected ? 'text-slate-950' : 'text-white'}`}>
+                                          {lvl.value}
+                                        </div>
+                                        <div className={`text-[11px] sm:text-xs whitespace-nowrap mt-0.5 ${isSelected ? 'text-slate-950 font-bold' : 'text-slate-300 font-medium'}`}>
+                                          {lvl.short}
+                                        </div>
+                                      </button>
+                                    );
+                                  })}
+                              </div>
+                            </div>
+
+                            {/* DYNAMIC BEHAVIORAL CALLOUT BOX (เมื่อคลิกเลือกคะแนนแล้ว แสดงคำอธิบาย) */}
+                            {currentVal && matchedRating && (
+                              <div className="p-4 rounded-2xl bg-amber-500/15 border border-amber-400/40 text-amber-100 flex items-start gap-3 shadow-md animate-blur-fade-up">
+                                <span className="text-amber-400 text-base mt-0.5 flex-shrink-0">✨</span>
+                                <div className="space-y-0.5">
+                                  <div className="text-[11px] font-bold text-amber-300 uppercase tracking-wider">
+                                    คำอธิบายพฤติกรรมของคะแนนระดับ {currentVal}:
+                                  </div>
+                                  <div className="text-sm font-semibold text-white leading-relaxed">
+                                    {matchedRating.desc}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+
+              {/* ============================================================== */}
+              {/* 3. QUALITATIVE EXECUTIVE REFLECTION TEXTAREA                    */}
+              {/* ============================================================== */}
+              <div className="p-6 rounded-3xl liquid-glass space-y-3 border border-white/20 shadow-xl">
+                <div className="flex items-center justify-between">
+                  <label htmlFor="notes-textarea" className="text-sm font-bold text-white flex items-center gap-2">
+                    <span className="text-base">💬</span>
+                    <span>ข้อสังเกตเชิงลึกและคำแนะนำเพิ่มเติมสำหรับผู้บริหาร</span>
+                  </label>
+                  <span className="text-[11px] text-slate-400">
+                    {isReadOnly ? 'บันทึกแล้ว (Read-Only)' : 'ระบุความคิดเห็นส่วนบุคคล'}
+                  </span>
+                </div>
+
+                <textarea
+                  id="notes-textarea"
+                  rows="3"
+                  readOnly={isReadOnly}
+                  disabled={isReadOnly}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder={isReadOnly ? "ไม่มีข้อคิดเห็นเพิ่มเติมที่บันทึกไว้" : "ระบุจุดเด่นสำคัญ หรือข้อสังเกตเชิงลึกในการพัฒนาต่อยอดเพื่อเตรียมความพร้อมสู่บทบาทผู้นำในอนาคต..."}
+                  className={`w-full p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed font-sans ${
+                    isReadOnly 
+                      ? 'bg-black/30 border-white/10 text-slate-300 cursor-not-allowed'
+                      : 'bg-black/40 border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400'
+                  }`}
+                ></textarea>
+              </div>
+
+              {/* ============================================================== */}
+              {/* 4. STICKY BOTTOM ACTION DOCK                                  */}
+              {/* ============================================================== */}
+              <div className="sticky bottom-0 p-5 rounded-3xl liquid-glass border border-white/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xl bg-slate-900/90 backdrop-blur-xl">
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                    {isReadOnly ? (
+                      <>
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                        <span className="text-emerald-300">ผลการประเมินถูกล็อคแล้ว (ระบบความปลอดภัย)</span>
+                      </>
+                    ) : isComplete ? (
+                      <>
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                        <span className="text-emerald-300">ประเมินครบถ้วนทั้ง 12 ข้อแล้ว</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span className="text-amber-300">ยังเหลืออีก {12 - answeredCount} ข้อที่ต้องประเมิน</span>
+                      </>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    {isReadOnly 
+                      ? 'หากต้องการแก้ไขผลการประเมิน กรุณาติดต่อทีมงาน HOD เพื่อดำเนินการปลดล็อค'
+                      : isComplete 
+                        ? 'สามารถตรวจสอบความถูกต้องและกดบันทึกผลการประเมินได้ทันที' 
+                        : 'กรุณาตอบแบบประเมินให้ครบถ้วนทั้ง 12 ข้อ เพื่อยืนยันการส่งผลประเมิน'}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {isReadOnly ? (
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-2 shadow-lg shadow-amber-400/25 active:scale-95"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
+                      </svg>
+                      <span>ปิดหน้าต่าง (ผลประเมินถูกล็อคแล้ว)</span>
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        onClick={onClose}
+                        className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-bold transition-colors cursor-pointer"
+                      >
+                        ปิด / ยกเลิก
+                      </button>
+
+                      {isAdmin && isComplete && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onReset && onReset();
+                            onClose();
+                          }}
+                          className="px-5 py-3 rounded-2xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/50 text-xs font-bold transition-colors cursor-pointer"
+                          title="ล้างคะแนนเพื่อทดสอบระบบใหม่ (Admin Reset)"
+                        >
+                          รีเซ็ตคะแนน (Admin)
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        disabled={!isComplete}
+                        onClick={handleSubmit}
+                        className={`px-8 py-3.5 rounded-2xl text-xs font-black tracking-wide transition-all flex items-center gap-2.5 ${
+                          isComplete
+                            ? 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-lg shadow-amber-400/35 active:scale-95 cursor-pointer'
+                            : 'bg-white/5 text-slate-500 border border-white/10 cursor-not-allowed opacity-60 shadow-none'
+                        }`}
+                      >
+                        {isComplete ? (
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                        )}
+                        <span>บันทึกและส่งผลการประเมิน</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 4. ADMIN DETAIL REPORT MODAL
+    // ==========================================
+    function AdminCandidateDetailModal({ candidate, evaluation, onClose }) {
+      const stats = calculateScore(evaluation?.scores || {});
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl overflow-y-auto">
+          <div className="w-full max-w-2xl liquid-glass rounded-3xl shadow-2xl border border-white/20 flex flex-col max-h-[90vh] overflow-hidden my-auto animate-modal-pop text-white">
+            
+            <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
+              <div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30 whitespace-nowrap">
+                  {candidate.department} • {candidate.company}
+                </span>
+                <h3 className="text-lg font-black text-white mt-1">
+                  {candidate.fullName}
+                </h3>
+                <p className="text-xs text-slate-400">
+                  {candidate.departmentFull}
+                </p>
+              </div>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white bg-white/5 border border-white/10"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 overflow-y-auto custom-scroll space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-center">
+                  <div className="text-[11px] text-slate-400">คะแนนประเมินรวม</div>
+                  <div className="text-3xl font-black text-amber-400 mt-1">
+                    {stats.rawScore} <span className="text-xs font-normal text-slate-400">/ 60</span>
+                  </div>
+                  <div className="text-xs text-slate-300 mt-0.5">({stats.percentage}%)</div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-center flex flex-col justify-center items-center">
+                  <div className="text-[11px] text-slate-400">ระดับศักยภาพที่วิเคราะห์ได้</div>
+                  <span className={`inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold border ${stats.tierColor}`}>
+                    {stats.potentialTier}
+                  </span>
+                </div>
+              </div>
+
+              {/* 4 Dimension Breakdown */}
+              <div className="space-y-3">
+                <div className="text-xs font-bold text-slate-300">ผลการประเมินรายมิติ</div>
+                <div className="grid grid-cols-1 gap-2.5">
+                  {DIMENSIONS.map((d) => {
+                    const avgScore = stats.dimScores[d.id] || 0;
+                    const pct = Math.round((avgScore / 5) * 100);
+                    return (
+                      <div key={d.id} className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
+                        <div className="flex items-center justify-between text-xs mb-1.5">
+                          <span className="font-semibold text-slate-200">{d.title}</span>
+                          <span className="font-bold text-amber-300">{avgScore.toFixed(2)} / 5.00 ({pct}%)</span>
+                        </div>
+                        <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500" 
+                            style={{ width: `${pct}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Qualitative Notes */}
+              {evaluation?.notes && (
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+                  <div className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                    <span>💬</span>
+                    <span>ข้อคิดเห็นและข้อเสนอแนะเพิ่มเติม:</span>
+                  </div>
+                  <p className="text-xs text-slate-200 leading-relaxed italic bg-black/20 p-3 rounded-xl border border-white/5">
+                    "{evaluation.notes}"
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 border-t border-white/10 flex justify-end bg-white/[0.02]">
+              <button
+                onClick={onClose}
+                className="px-5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white"
+              >
+                ปิดหน้าต่าง
+              </button>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 5. OFFICIAL GOOGLE APPS SCRIPT WEBHOOK CONFIG
+    // ==========================================
+    const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzdkvVUcupc6Z9W1O-ltyZuUGWe0WaoYJ5mSID6ER7R2gP388Z_Y7Q_jsjngvCPp12y/exec';
+
+    // ==========================================
+    // 6. MAIN APPLICATION COMPONENT
+    // ==========================================
+    function App() {
+      // Current Authenticated User State
+      const [currentUser, setCurrentUser] = useState(() => {
+        const saved = localStorage.getItem('bafs_talent_user');
+        return saved ? JSON.parse(saved) : null;
+      });
+
+      // Login Inputs
+      const [emailInput, setEmailInput] = useState('');
+      const [passwordInput, setPasswordInput] = useState('');
+      const [loginError, setLoginError] = useState('');
+
+      // Evaluations Database in LocalStorage
+      const [evaluations, setEvaluations] = useState(() => {
+        const saved = localStorage.getItem('bafs_evaluations_db');
+        return saved ? JSON.parse(saved) : {};
+      });
+
+      // Hero Carousel Index
+      const [selectedHeroIndex, setSelectedHeroIndex] = useState(0);
+
+      // Active Evaluation Modal Candidate
+      const [evaluatingCandidate, setEvaluatingCandidate] = useState(null);
+
+      // Admin Candidate Detail Modal
+      const [adminDetailCandidate, setAdminDetailCandidate] = useState(null);
+
+      // Admin View Mode: 'cinema' or 'matrix'
+      const [adminViewMode, setAdminViewMode] = useState('cinema');
+
+      // Webhook URL (Fixed to official Google Apps Script deployment)
+      const webhookUrl = DEFAULT_WEBHOOK_URL;
+      const [isSyncing, setIsSyncing] = useState(false);
+      const [lastSyncedAt, setLastSyncedAt] = useState(null);
+
+      // Toast feedback
+      const [toastMessage, setToastMessage] = useState(null);
+
+      const showToast = (msg) => {
+        setToastMessage(msg);
+        setTimeout(() => setToastMessage(null), 3500);
+      };
+
+      // In-flight submissions tracker (anti-race condition during background sync)
+      const pendingSubmissionsRef = useRef({});
+
+      // Cross-tab broadcast channel for immediate multi-tab synchronization on the same device
+      const syncChannelRef = useRef(null);
+
+      useEffect(() => {
+        try {
+          syncChannelRef.current = new BroadcastChannel('bafs_talent_sync');
+          syncChannelRef.current.onmessage = (event) => {
+            if (event.data?.type === 'RESET_ALL') {
+              setEvaluations({});
+              localStorage.removeItem('bafs_evaluations_db');
+              showToast('ข้อมูลถูกรีเซ็ตจากแท็บแอดมิน');
+            } else if (event.data?.type === 'RESET_SINGLE') {
+              const candId = event.data.candidateId;
+              setEvaluations((prev) => {
+                const updated = { ...prev };
+                delete updated[candId];
+                Object.keys(updated).forEach((k) => {
+                  if (k.endsWith(`_${candId}`)) delete updated[k];
+                });
+                localStorage.setItem('bafs_evaluations_db', JSON.stringify(updated));
+                return updated;
+              });
+              showToast(`ปลดล็อคการประเมิน (${candId}) จากแท็บแอดมิน`);
+            } else if (event.data?.type === 'SYNC_REQUEST') {
+              syncCloudEvaluations(true);
+            }
+          };
+        } catch (e) {}
+
+        const handleStorageChange = (e) => {
+          if (e.key === 'bafs_evaluations_db') {
+            try {
+              const updated = e.newValue ? JSON.parse(e.newValue) : {};
+              setEvaluations(updated);
+            } catch (err) {}
+          }
+        };
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+          window.removeEventListener('storage', handleStorageChange);
+          if (syncChannelRef.current) {
+            syncChannelRef.current.close();
+          }
+        };
+      }, []);
+
+      // Cloud Cross-Platform Two-Way Sync (doGet from Google Apps Script)
+      // MASTER SOURCE OF TRUTH: Google Sheets (PotentialEva)
+      const syncCloudEvaluations = async (isBackground = false) => {
+        if (!webhookUrl) return;
+        if (!isBackground) setIsSyncing(true);
+        try {
+          const res = await fetch(webhookUrl, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            const json = await res.json();
+            if (json && json.success && json.payload) {
+              const cloudEvals = json.payload.evaluations || {};
+              const now = Date.now();
+
+              // REBUILD evaluations directly from Google Sheets (Single Source of Truth)
+              // This guarantees that any candidate reset in Google Sheets is removed from the Evaluator screen!
+              const freshEvals = {};
+
+              // 1. Populate all active evaluations verified in Google Sheets
+              Object.keys(cloudEvals).forEach((candId) => {
+                const record = cloudEvals[candId];
+                freshEvals[candId] = record;
+                if (record.evaluatorId) {
+                  freshEvals[`${record.evaluatorId}_${candId}`] = record;
+                }
+                if (currentUser) {
+                  freshEvals[`${currentUser.id}_${candId}`] = record;
+                }
+                EVALUATORS.forEach((ev) => {
+                  freshEvals[`${ev.id}_${candId}`] = record;
+                });
+              });
+
+              // 2. Protect any in-flight local submission within 15 seconds (anti-race condition)
+              Object.keys(pendingSubmissionsRef.current).forEach((candId) => {
+                const subTime = pendingSubmissionsRef.current[candId];
+                if (now - subTime < 15000 && evaluations[candId]) {
+                  freshEvals[candId] = evaluations[candId];
+                  if (currentUser) {
+                    freshEvals[`${currentUser.id}_${candId}`] = evaluations[candId];
+                  }
+                } else if (now - subTime >= 15000) {
+                  delete pendingSubmissionsRef.current[candId];
+                }
+              });
+
+              setEvaluations(freshEvals);
+              localStorage.setItem('bafs_evaluations_db', JSON.stringify(freshEvals));
+              setLastSyncedAt(new Date());
+
+              if (!isBackground) {
+                showToast(`ซิงก์ข้อมูลจาก Google Sheets สำเร็จ (${json.payload.count || 0} รายการ)`);
+              }
+            }
+          }
+        } catch (err) {
+          console.warn('Cloud sync error (fallback to local cache):', err);
+          if (!isBackground) {
+            showToast('เชื่อมต่อ Google Sheets ไม่สำเร็จ (ใช้งานข้อมูลออฟไลน์)');
+          }
+        } finally {
+          if (!isBackground) setIsSyncing(false);
+        }
+      };
+
+      // Continuous Cloud Sync: on load, user change, every 30s, and whenever tab becomes active/visible
+      useEffect(() => {
+        syncCloudEvaluations(true);
+
+        const timer = setInterval(() => {
+          syncCloudEvaluations(true);
+        }, 30000);
+
+        const onVisibilityChange = () => {
+          if (document.visibilityState === 'visible') {
+            syncCloudEvaluations(true);
+          }
+        };
+
+        const onFocus = () => {
+          syncCloudEvaluations(true);
+        };
+
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('focus', onFocus);
+
+        return () => {
+          clearInterval(timer);
+          document.removeEventListener('visibilitychange', onVisibilityChange);
+          window.removeEventListener('focus', onFocus);
+        };
+      }, [webhookUrl, currentUser?.id]);
+
+      // Executive Horizon Motion & Talent Constellation Controller
+      useEffect(() => {
+        // Toggle Cinematic Horizon Drift on background
+        const bgEl = document.getElementById('talent-spotlight-bg');
+        if (bgEl) {
+          if (currentUser) {
+            bgEl.classList.add('has-motion');
+          } else {
+            bgEl.classList.remove('has-motion');
+          }
+        }
+
+        // Initialize Talent Constellation Canvas
+        const canvas = document.getElementById('talent-constellation-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let animId;
+        let w = (canvas.width = window.innerWidth);
+        let h = (canvas.height = window.innerHeight);
+
+        let mouseX = w / 2;
+        let mouseY = h / 2;
+        let targetX = w / 2;
+        let targetY = h / 2;
+
+        const onResize = () => {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        };
+        const onMouseMove = (e) => {
+          targetX = e.clientX;
+          targetY = e.clientY;
+        };
+        window.addEventListener('resize', onResize);
+        window.addEventListener('mousemove', onMouseMove);
+
+        // 38 Talent Nodes
+        const nodeCount = 38;
+        const nodes = [];
+        const colorTiers = [
+          'rgba(56, 189, 248, ',  // sky azure
+          'rgba(14, 165, 233, ',  // royal blue
+          'rgba(245, 158, 11, ',  // champagne gold
+          'rgba(241, 245, 249, ', // diamond white
+        ];
+
+        for (let i = 0; i < nodeCount; i++) {
+          nodes.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            radius: Math.random() * 1.1 + 0.7,
+            color: colorTiers[Math.floor(Math.random() * colorTiers.length)],
+            baseAlpha: Math.random() * 0.32 + 0.15,
+            pulseSpeed: Math.random() * 0.025 + 0.012,
+            pulseAngle: Math.random() * Math.PI * 2,
+            vx: (Math.random() - 0.5) * 0.22,
+            vy: (Math.random() - 0.5) * 0.22,
+          });
+        }
+
+        const render = () => {
+          ctx.clearRect(0, 0, w, h);
+
+          // Smooth mouse parallax inertia
+          mouseX += (targetX - mouseX) * 0.035;
+          mouseY += (targetY - mouseY) * 0.035;
+          const parallaxX = (mouseX - w / 2) * 0.022;
+          const parallaxY = (mouseY - h / 2) * 0.022;
+
+          // Connecting threads
+          for (let i = 0; i < nodes.length; i++) {
+            const p1 = nodes[i];
+            for (let j = i + 1; j < nodes.length; j++) {
+              const p2 = nodes[j];
+              const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+              if (dist < 95) {
+                const threadAlpha = 0.04 * (1 - dist / 95);
+                ctx.beginPath();
+                ctx.moveTo(p1.x + parallaxX, p1.y + parallaxY);
+                ctx.lineTo(p2.x + parallaxX, p2.y + parallaxY);
+                ctx.strokeStyle = `rgba(56, 189, 248, ${threadAlpha})`;
+                ctx.lineWidth = 0.55;
+                ctx.stroke();
+              }
+            }
+          }
+
+          // Render nodes
+          for (let i = 0; i < nodes.length; i++) {
+            const p = nodes[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.pulseAngle += p.pulseSpeed;
+
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h;
+            if (p.y > h) p.y = 0;
+
+            const alpha = p.baseAlpha + Math.sin(p.pulseAngle) * 0.12;
+            ctx.beginPath();
+            ctx.arc(p.x + parallaxX, p.y + parallaxY, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + Math.max(0.06, alpha) + ')';
+            ctx.fill();
+          }
+
+          animId = requestAnimationFrame(render);
+        };
+
+        render();
+
+        return () => {
+          window.removeEventListener('resize', onResize);
+          window.removeEventListener('mousemove', onMouseMove);
+          cancelAnimationFrame(animId);
+        };
+      }, [currentUser]);
+
+      // Handle Login (STRICT PASSWORD CHECK)
+      const handleLogin = (e) => {
+        e.preventDefault();
+        setLoginError('');
+
+        const email = emailInput.trim().toLowerCase();
+        const pwd = passwordInput.trim();
+
+        const evaluator = EVALUATORS.find(
+          (u) => (u.email.toLowerCase() === email || (u.emailAlt && u.emailAlt.toLowerCase() === email))
+        );
+
+        if (!evaluator) {
+          setLoginError('ไม่พบข้อมูลบัญชีผู้ใช้งานในระบบ');
+          return;
+        }
+
+        const allowedPasswords = [
+          evaluator.password,
+          evaluator.password.replace('2026', '2027'),
+          evaluator.password.replace('2027', '2026'),
+          ...(evaluator.passwords || [])
+        ];
+
+        if (!allowedPasswords.includes(pwd)) {
+          setLoginError('รหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบและลองใหม่อีกครั้ง');
+          return;
+        }
+
+        setCurrentUser(evaluator);
+        localStorage.setItem('bafs_talent_user', JSON.stringify(evaluator));
+        setSelectedHeroIndex(0);
+        setAdminViewMode('cinema');
+        setEvaluatingCandidate(null);
+        setAdminDetailCandidate(null);
+        showToast(`ยินดีต้อนรับคุณ ${evaluator.name}`);
+      };
+
+      const handleLogout = () => {
+        setCurrentUser(null);
+        localStorage.removeItem('bafs_talent_user');
+        setEmailInput('');
+        setPasswordInput('');
+        setLoginError('');
+        setSelectedHeroIndex(0);
+        setAdminViewMode('cinema');
+        setEvaluatingCandidate(null);
+        setAdminDetailCandidate(null);
+      };
+
+      // Strict Admin Permission: ONLY admin@bafs.co.th can view Matrix, edit locked evals, or reset data
+      const isSuperAdmin = Boolean(currentUser && currentUser.isAdmin && currentUser.email.toLowerCase() === 'admin@bafs.co.th');
+
+      // Candidates Filtered by Evaluator (Multi-key Matching: by ID, stripped ID, email, and emailAlt)
+      const myAssignedCandidates = useMemo(() => {
+        if (!currentUser) return [];
+        if (isSuperAdmin) return CANDIDATES;
+
+        const currentId = String(currentUser.id || '').toLowerCase().trim();
+        const strippedId = currentId.replace(/^eval_/, '');
+        const currentEmail = String(currentUser.email || '').toLowerCase().trim();
+        const currentEmailAlt = String(currentUser.emailAlt || '').toLowerCase().trim();
+
+        return CANDIDATES.filter((c) => {
+          // 1. Check assignedEvaluatorIds (supports both 'kanit' and 'eval_kanit')
+          if (c.assignedEvaluatorIds && Array.isArray(c.assignedEvaluatorIds)) {
+            const hasIdMatch = c.assignedEvaluatorIds.some((eid) => {
+              const idStr = String(eid).toLowerCase().trim();
+              return idStr === currentId || idStr === strippedId || idStr.replace(/^eval_/, '') === strippedId;
+            });
+            if (hasIdMatch) return true;
+          }
+
+          // 2. Check evaluator email matching
+          if (c.evaluatorEmail) {
+            const candEmail = String(c.evaluatorEmail).toLowerCase().trim();
+            if (candEmail === currentEmail || (currentEmailAlt && candEmail === currentEmailAlt)) {
+              return true;
+            }
+          }
+          if (c.evaluatorEmailAlt) {
+            const candEmailAlt = String(c.evaluatorEmailAlt).toLowerCase().trim();
+            if (candEmailAlt === currentEmail || (currentEmailAlt && candEmailAlt === currentEmailAlt)) {
+              return true;
+            }
+          }
+
+          // 3. Fallback: department & company match (e.g. Head of AZ -> AZ BAFS)
+          if (currentUser.department && c.department && currentUser.company && c.company) {
+            if (currentUser.department.toUpperCase() === c.department.toUpperCase() &&
+                currentUser.company.toUpperCase() === c.company.toUpperCase()) {
+              return true;
+            }
+          }
+
+          return false;
+        });
+      }, [currentUser, isSuperAdmin]);
+
+      const focusedCandidate = myAssignedCandidates[selectedHeroIndex] || myAssignedCandidates[0];
+
+      // View Mode Helpers: GUARANTEE that regular evaluators always see the candidate spotlight & reel
+      const isCinemaView = !isSuperAdmin || adminViewMode === 'cinema';
+      const isMatrixView = isSuperAdmin && adminViewMode === 'matrix';
+
+      // Save Evaluation Handler & Permanent Lock
+      const handleSaveEvaluation = async (candidateId, scores, notes) => {
+        const existingEval = (evaluations[`${currentUser.id}_${candidateId}`] || evaluations[candidateId]);
+        const isAlreadyLocked = Boolean(existingEval && Object.keys(existingEval.scores || {}).length === 12);
+
+        // Strict guard: Evaluators cannot edit locked evaluations. ONLY admin@bafs.co.th can edit.
+        if (isAlreadyLocked && !isSuperAdmin) {
+          alert('ผลการประเมินถูกส่งเข้าระบบแล้ว ไม่สามารถแก้ไขได้ หากต้องการแก้ไขกรุณาติดต่อทีมงาน HOD');
+          return;
+        }
+
+        const candNumMatch = String(candidateId).match(/\d+/);
+        const candidateNo = candNumMatch ? Number(candNumMatch[0]) : 1;
+        const newRecord = {
+          candidateId,
+          candidateNo,
+          evaluatorId: currentUser.id,
+          evaluatorName: currentUser.name,
+          evaluatorEmail: currentUser.email,
+          scores,
+          notes,
+          isLocked: true,
+          submittedAt: new Date().toISOString()
+        };
+
+        // Mark in-flight submission (anti-race condition)
+        pendingSubmissionsRef.current[candidateId] = Date.now();
+
+        const updated = {
+          ...evaluations,
+          [`${currentUser.id}_${candidateId}`]: newRecord,
+          [candidateId]: newRecord
+        };
+
+        setEvaluations(updated);
+        localStorage.setItem('bafs_evaluations_db', JSON.stringify(updated));
+        setEvaluatingCandidate(null);
+        showToast('บันทึกผลการประเมินศักยภาพเรียบร้อยแล้ว (ระบบล็อคผลถาวร)');
+
+        // Broadcast to other tabs on same machine immediately
+        try {
+          if (syncChannelRef.current) {
+            syncChannelRef.current.postMessage({ type: 'SYNC_REQUEST' });
+          }
+        } catch (e) {}
+
+        // Push to Google Sheets Webhook
+        if (webhookUrl) {
+          try {
+            await fetch(webhookUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'save',
+                ...newRecord
+              })
+            });
+            setTimeout(() => {
+              syncCloudEvaluations(true);
+            }, 1000);
+          } catch (err) {
+            console.error('Webhook sync failed', err);
+          }
+        }
+      };
+
+      // Admin Reset Evaluation for Testing (UAT) - STRICT: admin@bafs.co.th ONLY
+      const handleResetEvaluation = async (candidateId) => {
+        if (!isSuperAdmin) {
+          alert('สิทธิ์ไม่เพียงพอ: เฉพาะบัญชี admin@bafs.co.th เท่านั้นที่สามารถรีเซ็ตผลการประเมินได้');
+          return;
+        }
+
+        const cand = CANDIDATES.find((c) => c.id === candidateId);
+        const candName = cand ? cand.fullName : candidateId;
+        const candNumMatch = String(candidateId).match(/\d+/);
+        const candidateNo = candNumMatch ? Number(candNumMatch[0]) : 1;
+
+        if (!window.confirm(`ท่านต้องการรีเซ็ตผลการประเมินของ "${candName}" เพื่อทดสอบระบบใหม่หรือไม่?\n\n(ระบบจะล้างคะแนนใน Google Sheets และปลดล็อคให้ผู้ประเมินสามารถประเมินใหม่ได้)`)) {
+          return;
+        }
+
+        // Clear any in-flight pending flag
+        delete pendingSubmissionsRef.current[candidateId];
+
+        // 1. Remove from local state
+        setEvaluations((prev) => {
+          const updated = { ...prev };
+          delete updated[candidateId];
+          Object.keys(updated).forEach((k) => {
+            if (k.endsWith(`_${candidateId}`)) {
+              delete updated[k];
+            }
+          });
+          localStorage.setItem('bafs_evaluations_db', JSON.stringify(updated));
+          return updated;
+        });
+
+        // Broadcast to other tabs on same machine immediately
+        try {
+          if (syncChannelRef.current) {
+            syncChannelRef.current.postMessage({ type: 'RESET_SINGLE', candidateId });
+          }
+        } catch (e) {}
+
+        showToast(`กำลังรีเซ็ตผลการประเมินของ ${candName}...`);
+
+        // 2. Send Reset action to Google Apps Script Webhook
+        if (webhookUrl) {
+          try {
+            await fetch(webhookUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'reset',
+                candidateId,
+                candidateNo,
+                evaluatorName: currentUser ? currentUser.name : 'Admin'
+              })
+            });
+            showToast(`รีเซ็ตและปลดล็อค "${candName}" เรียบร้อยแล้ว (พร้อมประเมินใหม่)`);
+            setTimeout(() => {
+              syncCloudEvaluations(true);
+            }, 800);
+          } catch (err) {
+            console.error('Reset webhook failed:', err);
+          }
+        }
+      };
+
+      // Admin Reset All Evaluations for Testing (UAT) - STRICT: admin@bafs.co.th ONLY
+      const handleResetAllEvaluations = async () => {
+        if (!isSuperAdmin) {
+          alert('สิทธิ์ไม่เพียงพอ: เฉพาะบัญชี admin@bafs.co.th เท่านั้นที่สามารถรีเซ็ตผลการประเมินได้');
+          return;
+        }
+
+        if (!window.confirm('⚠️ คำเตือน: ท่านต้องการรีเซ็ตผลการประเมินของผู้รับการประเมินทั้งหมด (14 ท่าน) เพื่อทดสอบระบบใหม่ใช่หรือไม่?\n\nคะแนนทั้งหมดใน Google Sheets จะถูกล้างออกและปลดล็อคทุกท่าน')) {
+          return;
+        }
+
+        pendingSubmissionsRef.current = {};
+        setEvaluations({});
+        localStorage.removeItem('bafs_evaluations_db');
+        showToast('กำลังรีเซ็ตผลการประเมินทั้งหมดใน Google Sheets...');
+
+        // Broadcast to other tabs on same machine immediately
+        try {
+          if (syncChannelRef.current) {
+            syncChannelRef.current.postMessage({ type: 'RESET_ALL' });
+          }
+        } catch (e) {}
+
+        if (webhookUrl) {
+          try {
+            await fetch(webhookUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'reset_all',
+                evaluatorName: currentUser ? currentUser.name : 'Admin'
+              })
+            });
+            showToast('รีเซ็ตข้อมูลทั้งหมด 14 ท่านเรียบร้อยแล้ว');
+            setTimeout(() => {
+              syncCloudEvaluations(true);
+            }, 800);
+          } catch (err) {
+            console.error('Reset all webhook failed:', err);
+          }
+        }
+      };
+
+
+      // Check focused candidate evaluation status (Dual Key Check: by user key OR global candidateId)
+      const focusedEval = (currentUser && focusedCandidate)
+        ? (evaluations[`${currentUser.id}_${focusedCandidate.id}`] || evaluations[focusedCandidate.id])
+        : null;
+      const isFocusedDone = Boolean(focusedEval && Object.keys(focusedEval.scores || {}).length === 12);
+
+      // =========================================================================
+      // VIEW 1: AUTHENTICATION SCREEN (EXECUTIVE TALENT CALIBRATION)
+      // =========================================================================
+      if (!currentUser) {
+        return (
+          <div className="min-h-screen w-full flex items-center justify-center px-4 py-12 relative overflow-hidden">
+            <div 
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty('--sheen-x', `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty('--sheen-y', `${e.clientY - rect.top}px`);
+              }}
+              className="w-full max-w-[465px] glass-3d-card p-8 sm:p-10 relative z-10 animate-blur-fade-up group"
+            >
+              {/* Dynamic Specular Sheen Layer */}
+              <div className="glass-spotlight-sheen"></div>
+
+              <div className="relative z-10 space-y-6">
+                
+                {/* Brand Header */}
+                <div className="text-center space-y-3">
+                  <div className="flex justify-center mb-2">
+                    <div className="p-3 px-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.45)] border border-white/60 inline-flex items-center justify-center transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(2,132,199,0.25)]">
+                      <img 
+                        src="./BAFS Groupรองขาว-01.png" 
+                        alt="BAFS Group Logo" 
+                        className="h-14 sm:h-16 w-auto object-contain drop-shadow-xs" 
+                        onError={(e) => { e.currentTarget.src = './bafs-logo.png'; }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-950/90 border border-sky-500/40 text-[10px] sm:text-[11px] font-bold tracking-widest text-sky-300 uppercase shadow-inner">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                    BAFS GROUP • TALENT 2027 HORIZON
+                  </div>
+
+                  <div className="space-y-1.5 pt-0.5">
+                    <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                      Executive Talent Calibration
+                    </h1>
+                    <p className="text-xs text-slate-200 font-medium leading-relaxed">
+                      ระบบประเมินศักยภาพผู้นำและกลุ่มบุคลากรศักยภาพสูง<br className="hidden sm:inline" /> เพื่อขับเคลื่อนองค์กรสู่ปี 2027
+                    </p>
+                    <p className="text-[10px] sm:text-[11px] text-sky-200/60 font-light tracking-wide">
+                      Strategic Leadership & Talent Calibration for Future Readiness
+                    </p>
+                  </div>
+                </div>
+
+                {/* Login Form */}
+                <form onSubmit={handleLogin} className="space-y-4 pt-1">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-200 block">
+                      อีเมลองค์กร (Corporate Email)
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      placeholder="กรอกอีเมลองค์กรของท่าน"
+                      className="w-full px-4 py-3 rounded-xl glass-3d-input text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none font-sans"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-200">
+                      รหัสผ่านเข้าถึงเฉพาะบุคคล (Executive Access Key)
+                    </label>
+                    <input
+                      type="password"
+                      required
+                      value={passwordInput}
+                      onChange={(e) => setPasswordInput(e.target.value)}
+                      placeholder="กรอกรหัสผ่านประจำตำแหน่งของท่าน"
+                      className="w-full px-4 py-3 rounded-xl glass-3d-input text-xs sm:text-sm placeholder:text-slate-500 focus:outline-none font-sans"
+                    />
+                  </div>
+
+                  {loginError && (
+                    <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-400/35 text-rose-200 text-xs flex items-center gap-2.5">
+                      <svg className="w-4 h-4 text-rose-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>{loginError}</span>
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 px-4 rounded-xl text-white text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 mt-2 bg-gradient-to-r from-[#005691] via-[#026cb5] to-[#0284c7] hover:from-[#026cb5] hover:via-[#0284c7] hover:to-[#38bdf8] shadow-lg shadow-sky-950/50 hover:shadow-sky-800/40 active:scale-[0.98] border border-sky-400/30 flex items-center justify-center gap-2 cursor-pointer group whitespace-nowrap"
+                  >
+                    <span>เข้าสู่ระบบการประเมิน (Access Portal)</span>
+                    <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+                </form>
+
+                {/* Security Footer Assurance */}
+                <div className="pt-3 border-t border-white/10 text-center space-y-1">
+                  <p className="text-[11px] font-semibold text-slate-300 flex items-center justify-center gap-1.5">
+                    <svg className="w-3.5 h-3.5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    BAFS Group Confidentiality Assured
+                  </p>
+                  <p className="text-[10px] text-slate-400 font-light leading-relaxed">
+                    ระบบประเมินความลับเฉพาะผู้บริหารระดับสูง • ข้อมูลถูกเข้ารหัสและปกป้องตามมาตรฐานองค์กร
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // =========================================================================
+      // VIEW 2: FULL-VIEWPORT EXECUTIVE TALENT HORIZON (CLEAN & STUNNING)
+      // =========================================================================
+      return (
+        <div className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden">
+          
+          {/* TOP ROW: LOGO & EVALUATOR PROFILE DOCK */}
+          <header className="relative z-20 px-4 sm:px-8 py-3.5 flex items-center justify-between bg-slate-950/60 backdrop-blur-xl border-b border-white/10 shadow-sm">
+            <div className="flex items-center gap-3">
+              <img 
+                src="./BAFS Groupรองขาว-01.png" 
+                alt="BAFS Group" 
+                className="h-10 sm:h-11 w-auto object-contain drop-shadow-md transition-transform hover:scale-105" 
+                onError={(e) => { e.currentTarget.src = './bafs-logo.png'; }}
+              />
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-black tracking-tight text-white">BAFS GROUP</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 shadow-xs whitespace-nowrap">
+                    TALENT 2027
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-200 font-medium">
+                  Talent Potential Horizon Matrix
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {isSuperAdmin && (
+                <div className="hidden sm:flex items-center p-1 rounded-xl liquid-glass text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setAdminViewMode('cinema')}
+                    className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      adminViewMode === 'cinema' ? 'bg-amber-500/30 text-amber-300 border border-amber-400/40 shadow-xs' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🎬 โหมดสปอตไลต์
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAdminViewMode('matrix')}
+                    className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      adminViewMode === 'matrix' ? 'bg-amber-500/30 text-amber-300 border border-amber-400/40 shadow-xs' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    📊 ภาพรวมผลการประเมิน
+                  </button>
+                </div>
+              )}
+
+              <div className="hidden md:flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-white/20 shadow-md">
+                <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
+                <div className="text-right">
+                  <div className="text-xs font-black text-white leading-tight">{currentUser.name}</div>
+                  <div className="text-[11px] text-slate-200 font-medium">{currentUser.role} ({currentUser.company})</div>
+                </div>
+              </div>
+
+              {/* Real-Time Cloud Sync Button */}
+              <button
+                type="button"
+                onClick={() => syncCloudEvaluations(false)}
+                disabled={isSyncing}
+                className="px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-white/20 transition-all flex items-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
+                title="ซิงก์ข้อมูลผลประเมินล่าสุดจาก Google Sheets แบบ Real-time"
+              >
+                <svg className={`w-3.5 h-3.5 text-amber-400 ${isSyncing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span className="text-xs font-bold hidden sm:inline">
+                  {isSyncing ? 'กำลังซิงก์...' : 'ซิงก์ข้อมูล'}
+                </span>
+              </button>
+
+
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-rose-950/60 text-xs font-bold text-slate-200 hover:text-rose-200 border border-white/20 hover:border-rose-400/40 transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span>ออกจากระบบ</span>
+              </button>
+            </div>
+          </header>
+
+          {/* ========================================================= */}
+          {/* CENTER: EXECUTIVE TALENT SPOTLIGHT HERO STAGE             */}
+          {/* ========================================================= */}
+          {isCinemaView && (
+            <main className="relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-8 lg:px-16 max-w-5xl py-8">
+              {focusedCandidate ? (
+                <div key={focusedCandidate.id} className="animate-blur-fade-up space-y-5 sm:space-y-6">
+                  
+                  {/* Status Pills */}
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-black tracking-widest text-amber-300 bg-amber-950/90 border border-amber-400/80 px-4 py-1.5 rounded-full uppercase shadow-[0_0_20px_rgba(245,158,11,0.4)] whitespace-nowrap">
+                      <span>⭐ TALENT CANDIDATE 2027</span>
+                    </span>
+
+                    <span className="text-xs font-bold text-slate-100 bg-slate-950/80 border border-white/20 px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-sm">
+                      ลำดับที่ {selectedHeroIndex + 1} จาก {myAssignedCandidates.length} ท่าน
+                    </span>
+
+                    {isFocusedDone ? (
+                      <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-950/85 text-emerald-300 border border-emerald-400/60 text-xs font-bold whitespace-nowrap shadow-sm">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                        <span>ประเมินเสร็จสิ้นแล้ว</span>
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-950/85 text-amber-300 border border-amber-400/60 text-xs font-bold whitespace-nowrap shadow-sm">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
+                        <span>รอการประเมิน</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* HUGE PROMINENT CANDIDATE NAME IN HERO */}
+                  <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] floating-text-shadow font-display">
+                    {focusedCandidate.fullName}
+                  </h1>
+
+                  {/* High-Contrast Executive Dimension Tags (Option 1) */}
+                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1.5">
+                    {/* Badge 1: Company & Department Code */}
+                    <span className={`font-black px-4 py-2.5 rounded-xl border backdrop-blur-xl whitespace-nowrap text-xs sm:text-[13px] tracking-wide ${
+                      focusedCandidate.company === 'BAFS' 
+                        ? 'bg-gradient-to-r from-blue-950/90 via-blue-900/60 to-slate-900/90 text-blue-200 border-blue-400/50 border-t-blue-300/70 shadow-[0_4px_16px_rgba(2,132,199,0.3)]' 
+                        : 'bg-gradient-to-r from-teal-950/90 via-teal-900/60 to-slate-900/90 text-teal-200 border-teal-400/50 border-t-teal-300/70 shadow-[0_4px_16px_rgba(20,184,166,0.3)]'
+                    }`}>
+                      {focusedCandidate.company} • {focusedCandidate.department}
+                    </span>
+
+                    {/* Badge 2: Full Department Name (VisionOS Frosted Azure Capsule with Specular Rim) */}
+                    <span className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-950/70 via-slate-900/85 to-slate-950/95 border border-sky-500/30 border-t-sky-300/70 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(2,132,199,0.35),inset_0_1px_1px_rgba(255,255,255,0.15)] whitespace-nowrap">
+                      <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.9)] animate-pulse"></span>
+                      <span className="text-xs sm:text-[13px] font-bold text-sky-100 tracking-wide">
+                        {focusedCandidate.departmentFull}
+                      </span>
+                    </span>
+
+                    {/* Badge 3: Demographics & Service Years (Frosted Champagne Metric Capsule) */}
+                    <span className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-900/85 via-amber-950/30 to-slate-950/95 border border-amber-400/30 border-t-amber-300/70 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(245,158,11,0.25),inset_0_1px_1px_rgba(255,255,255,0.15)] whitespace-nowrap text-xs sm:text-[13px] text-slate-200 font-medium">
+                      <span>อายุ <strong className="font-black text-amber-300 font-mono text-sm tracking-tight">{focusedCandidate.age}</strong> ปี</span>
+                      <span className="text-amber-400/40 text-xs">•</span>
+                      <span>อายุงาน <strong className="font-black text-amber-300 font-mono text-sm tracking-tight">{focusedCandidate.serviceYears}</strong> ปี</span>
+                    </span>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="pt-3 space-y-3">
+                    <div className="flex flex-wrap items-center gap-3.5">
+                      {isFocusedDone && !isSuperAdmin ? (
+                        <button
+                          onClick={() => setEvaluatingCandidate(focusedCandidate)}
+                          className="px-7 py-3.5 rounded-full bg-slate-900/90 hover:bg-slate-800 text-emerald-300 font-black text-sm border border-emerald-400/50 shadow-[0_0_25px_rgba(16,185,129,0.25)] transition-all flex items-center gap-2.5 cursor-pointer"
+                          title="คลิกเพื่อดูรายละเอียดผลการประเมินที่ส่งแล้ว"
+                        >
+                          <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                          <span>🔒 ส่งผลประเมินแล้ว (ระบบล็อค)</span>
+                        </button>
+                      ) : isFocusedDone && isSuperAdmin ? (
+                        <>
+                          <button
+                            onClick={() => setEvaluatingCandidate(focusedCandidate)}
+                            className="px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:via-amber-200 hover:to-yellow-300 text-slate-950 font-black text-xs sm:text-sm shadow-[0_0_25px_rgba(245,158,11,0.5)] transition-all flex items-center gap-2 cursor-pointer"
+                          >
+                            <svg className="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            <span>ดู / แก้ไขการประเมิน (Admin)</span>
+                          </button>
+
+                          <button
+                            onClick={() => handleResetEvaluation(focusedCandidate.id)}
+                            className="px-5 py-3.5 rounded-full bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/50 font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                            title="รีเซ็ตคะแนนท่านนี้ใน Google Sheets เพื่อทดสอบใหม่"
+                          >
+                            <svg className="w-4 h-4 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            <span>รีเซ็ตคะแนน (Admin)</span>
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => setEvaluatingCandidate(focusedCandidate)}
+                          className="px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:via-amber-200 hover:to-yellow-300 text-slate-950 font-black text-sm sm:text-base shadow-[0_0_35px_rgba(245,158,11,0.55)] hover:shadow-[0_0_50px_rgba(245,158,11,0.75)] transition-all transform active:scale-95 flex items-center gap-3 cursor-pointer"
+                        >
+                          <svg className="w-5 h-5 text-slate-950 font-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                          <span>เริ่มการประเมินศักยภาพ</span>
+                        </button>
+                      )}
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setSelectedHeroIndex(prev => Math.max(0, prev - 1))}
+                          disabled={selectedHeroIndex === 0}
+                          className="w-12 h-12 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/25 flex items-center justify-center text-slate-100 hover:text-white hover:border-amber-400 hover:bg-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shadow-lg"
+                          title="ผู้รับการประเมินท่านก่อนหน้า"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+
+                        <button
+                          onClick={() => setSelectedHeroIndex(prev => Math.max(0, Math.min(myAssignedCandidates.length - 1, prev + 1)))}
+                          disabled={selectedHeroIndex === myAssignedCandidates.length - 1}
+                          className="w-12 h-12 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/25 flex items-center justify-center text-slate-100 hover:text-white hover:border-amber-400 hover:bg-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shadow-lg"
+                          title="ผู้รับการประเมินท่านถัดไป"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    {isFocusedDone && !isSuperAdmin && (
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-amber-950/70 border border-amber-400/40 text-[11px] font-medium text-amber-200/90 shadow-sm backdrop-blur-md">
+                        <span className="text-amber-400">ℹ️</span>
+                        <span>ผลการประเมินถูกส่งเข้าระบบแล้ว ไม่สามารถแก้ไขได้ หากต้องการแก้ไขกรุณาติดต่อทีมงาน HOD</span>
+                      </div>
+                    )}
+                  </div>
+
+                </div>
+              ) : (
+                <div className="p-8 rounded-3xl liquid-glass text-center space-y-3">
+                  <p className="text-sm text-slate-300">ไม่พบรายชื่อผู้รับการประเมินที่ผูกกับบัญชีนี้</p>
+                </div>
+              )}
+            </main>
+          )}
+
+          {/* ========================================================= */}
+          {/* ADMIN MATRIX / UAT TABLE VIEW                             */}
+          {/* ========================================================= */}
+          {isMatrixView && (
+            <main className="relative z-10 flex-1 px-4 sm:px-8 py-6 max-w-7xl mx-auto w-full overflow-y-auto custom-scroll">
+              <div className="space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h2 className="text-xl font-black text-white">ภาพรวมผลการประเมินศักยภาพ (14 ท่าน)</h2>
+                    <p className="text-xs text-slate-300">
+                      ตรวจสอบคะแนน, ดูผลการวิเคราะห์ระดับศักยภาพ และสามารถรีเซ็ตข้อมูลเพื่อทดสอบใหม่ได้
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleResetAllEvaluations}
+                      className="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-sm"
+                      title="ล้างคะแนนทั้งหมด 14 ท่านใน Google Sheets เพื่อทดสอบระบบใหม่"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      <span>⚠️ รีเซ็ตข้อมูลทั้งหมด (Admin Reset)</span>
+                    </button>
+                    <button
+                      onClick={() => setAdminViewMode('cinema')}
+                      className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-white cursor-pointer"
+                    >
+                      กลับสู่โหมดสปอตไลต์
+                    </button>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl liquid-glass border border-white/20 overflow-hidden shadow-2xl">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-white/[0.04] text-slate-300 border-b border-white/10 font-bold uppercase tracking-wider">
+                        <tr>
+                          <th className="p-4">ผู้รับการประเมิน</th>
+                          <th className="p-4">บริษัท/ฝ่าย</th>
+                          <th className="p-4">สถานะ</th>
+                          <th className="p-4 text-center">คะแนนรวม</th>
+                          <th className="p-4 text-center">ระดับศักยภาพ</th>
+                          <th className="p-4 text-right">การจัดการ</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {CANDIDATES.map((cand) => {
+                          const evalKey = `${currentUser.id}_${cand.id}`;
+                          const ev = evaluations[evalKey] || evaluations[cand.id];
+                          const isDone = Boolean(ev && Object.keys(ev.scores || {}).length === 12);
+                          const stats = isDone ? calculateScore(ev.scores) : null;
+
+                          return (
+                            <tr key={cand.id} className="hover:bg-white/[0.03] transition-colors">
+                              <td className="p-4">
+                                <div className="font-bold text-white text-sm">{cand.fullName}</div>
+                                <div className="text-[11px] text-slate-400">อายุ {cand.age} ปี • อายุงาน {cand.serviceYears} ปี</div>
+                              </td>
+                              <td className="p-4">
+                                <span className="font-semibold text-slate-200">{cand.company}</span> • {cand.department}
+                                <div className="text-[10px] text-slate-400">{cand.departmentFull}</div>
+                              </td>
+                              <td className="p-4">
+                                {isDone ? (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-[11px] font-bold">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    เสร็จสมบูรณ์
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[11px] font-bold">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                                    รอการประเมิน
+                                  </span>
+                                )}
+                              </td>
+                              <td className="p-4 text-center">
+                                {stats ? (
+                                  <span className="font-bold text-amber-300 text-sm">{stats.rawScore} / 60</span>
+                                ) : (
+                                  <span className="text-slate-500">—</span>
+                                )}
+                              </td>
+                              <td className="p-4 text-center">
+                                {stats ? (
+                                  <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold border ${stats.tierColor}`}>
+                                    {stats.potentialTier}
+                                  </span>
+                                ) : (
+                                  <span className="text-slate-500">—</span>
+                                )}
+                              </td>
+                              <td className="p-4 text-right space-x-2">
+                                {isDone && (
+                                  <>
+                                    <button
+                                      onClick={() => setAdminDetailCandidate({ candidate: cand, evaluation: ev })}
+                                      className="px-3 py-1 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-400/40 text-xs font-semibold cursor-pointer"
+                                    >
+                                      ดูผลลัพธ์
+                                    </button>
+                                    <button
+                                      onClick={() => handleResetEvaluation(cand.id)}
+                                      className="px-3 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/40 text-xs font-semibold cursor-pointer"
+                                      title="รีเซ็ตคะแนนท่านนี้ใน Google Sheets เพื่อทดสอบใหม่"
+                                    >
+                                      รีเซ็ตคะแนน
+                                    </button>
+                                  </>
+                                )}
+                                <button
+                                  onClick={() => setEvaluatingCandidate(cand)}
+                                  className="px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs font-bold cursor-pointer"
+                                >
+                                  {isDone ? 'แก้ไข' : 'ประเมิน'}
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </main>
+          )}
+
+          {/* ========================================================= */}
+          {/* BOTTOM ROW: CANDIDATE REEL (ADAPTIVE GRID - ZERO OVERFLOW) */}
+          {/* ========================================================= */}
+          {isCinemaView && (
+            <footer className="relative z-20 px-4 sm:px-8 py-5 border-t border-white/15 bg-slate-950/80 backdrop-blur-2xl shadow-2xl">
+              <div className="max-w-7xl mx-auto space-y-3">
+                <div className="flex items-center justify-between text-xs">
+                  <div className="font-bold text-slate-200 flex items-center gap-2">
+                    <span>รายชื่อผู้รับการประเมินในความรับผิดชอบ</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 font-mono font-bold">
+                      {myAssignedCandidates.filter(c => {
+                        const ev = evaluations[`${currentUser.id}_${c.id}`] || evaluations[c.id];
+                        return Boolean(ev && Object.keys(ev.scores || {}).length === 12);
+                      }).length} / {myAssignedCandidates.length} เสร็จสิ้น
+                    </span>
+                  </div>
+                  <div className="text-slate-400 text-[11px] hidden sm:inline">
+                    คลิกการ์ดเพื่อสลับสปอตไลต์ หรือเริ่มการประเมิน
+                  </div>
+                </div>
+
+                {/* Candidate Cards: Adaptive Grid for <= 4 candidates, Scroll reel for > 4 candidates */}
+                {myAssignedCandidates.length <= 4 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 w-full pt-1">
+                    {myAssignedCandidates.map((cand, idx) => {
+                      const isSelected = selectedHeroIndex === idx;
+                      const evalKey = `${currentUser.id}_${cand.id}`;
+                      const ev = evaluations[evalKey] || evaluations[cand.id];
+                      const isDone = Boolean(ev && Object.keys(ev.scores || {}).length === 12);
+
+                      return (
+                        <div
+                          key={cand.id}
+                          onClick={() => setSelectedHeroIndex(idx)}
+                          className={`w-full p-3.5 rounded-2xl cursor-pointer transition-all duration-300 flex items-center justify-between gap-3 border shadow-md ${
+                            isSelected
+                              ? 'bg-slate-950/95 border-amber-400 ring-2 ring-amber-400/70 shadow-[0_0_30px_rgba(245,158,11,0.4)] scale-[1.02]'
+                              : 'bg-slate-950/85 hover:bg-slate-900/95 border-white/20 hover:border-amber-400/60'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden min-w-0">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-xs flex-shrink-0 border ${
+                              cand.company === 'BAFS' ? 'bg-gradient-to-br from-blue-700 to-blue-950 border-blue-400/40' : 'bg-gradient-to-br from-teal-600 to-teal-950 border-teal-400/40'
+                            }`}>
+                              {cand.company}
+                            </div>
+
+                            <div className="overflow-hidden min-w-0">
+                              <div className="text-[10px] font-bold text-amber-300 uppercase tracking-wide truncate whitespace-nowrap">
+                                {cand.department} • {cand.company}
+                              </div>
+                              <h4 className="text-xs sm:text-sm font-black text-white truncate whitespace-nowrap">
+                                {cand.fullName}
+                              </h4>
+                              <p className="text-[11px] text-slate-300 font-medium truncate whitespace-nowrap">
+                                {cand.departmentFull}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex-shrink-0">
+                            {isDone ? (
+                              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)]" title="ประเมินเรียบร้อย"></span>
+                            ) : (
+                              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]" title="รอการประเมิน"></span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-3.5 overflow-x-auto reel-scroll pb-2 pt-1 pr-8">
+                    {myAssignedCandidates.map((cand, idx) => {
+                      const isSelected = selectedHeroIndex === idx;
+                      const evalKey = `${currentUser.id}_${cand.id}`;
+                      const ev = evaluations[evalKey] || evaluations[cand.id];
+                      const isDone = Boolean(ev && Object.keys(ev.scores || {}).length === 12);
+
+                      return (
+                        <div
+                          key={cand.id}
+                          onClick={() => setSelectedHeroIndex(idx)}
+                          className={`min-w-[240px] sm:min-w-[270px] p-3.5 rounded-2xl cursor-pointer transition-all duration-300 flex items-center justify-between gap-3 border flex-shrink-0 shadow-md ${
+                            isSelected
+                              ? 'bg-slate-950/95 border-amber-400 ring-2 ring-amber-400/70 shadow-[0_0_30px_rgba(245,158,11,0.4)] scale-[1.02]'
+                              : 'bg-slate-950/85 hover:bg-slate-900/95 border-white/20 hover:border-amber-400/60'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden min-w-0">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-xs flex-shrink-0 border ${
+                              cand.company === 'BAFS' ? 'bg-gradient-to-br from-blue-700 to-blue-950 border-blue-400/40' : 'bg-gradient-to-br from-teal-600 to-teal-950 border-teal-400/40'
+                            }`}>
+                              {cand.company}
+                            </div>
+
+                            <div className="overflow-hidden min-w-0">
+                              <div className="text-[10px] font-bold text-amber-300 uppercase tracking-wide truncate whitespace-nowrap">
+                                {cand.department} • {cand.company}
+                              </div>
+                              <h4 className="text-xs sm:text-sm font-black text-white truncate whitespace-nowrap">
+                                {cand.fullName}
+                              </h4>
+                              <p className="text-[11px] text-slate-300 font-medium truncate whitespace-nowrap">
+                                {cand.departmentFull}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex-shrink-0">
+                            {isDone ? (
+                              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)]" title="ประเมินเรียบร้อย"></span>
+                            ) : (
+                              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]" title="รอการประเมิน"></span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </footer>
+          )}
+
+          {/* ========================================================= */}
+          {/* MODALS LAYER                                              */}
+          {/* ========================================================= */}
+          {evaluatingCandidate && (
+            <AssessmentModal
+              candidate={evaluatingCandidate}
+              initialEvaluation={evaluations[`${currentUser.id}_${evaluatingCandidate.id}`] || evaluations[evaluatingCandidate.id]}
+              isLocked={Boolean(
+                (evaluations[`${currentUser.id}_${evaluatingCandidate.id}`] || evaluations[evaluatingCandidate.id]) &&
+                Object.keys((evaluations[`${currentUser.id}_${evaluatingCandidate.id}`] || evaluations[evaluatingCandidate.id]).scores || {}).length === 12
+              )}
+              isAdmin={isSuperAdmin}
+              onSave={handleSaveEvaluation}
+              onReset={() => handleResetEvaluation(evaluatingCandidate.id)}
+              onClose={() => setEvaluatingCandidate(null)}
+            />
+          )}
+
+          {adminDetailCandidate && (
+            <AdminCandidateDetailModal
+              candidate={adminDetailCandidate.candidate}
+              evaluation={adminDetailCandidate.evaluation}
+              onClose={() => setAdminDetailCandidate(null)}
+            />
+          )}
+
+
+          {/* Floating Toast Notification */}
+          {toastMessage && (
+            <div className="fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-slate-900/95 border border-amber-400/60 shadow-2xl text-white text-xs font-bold flex items-center gap-3 animate-blur-fade-up">
+              <span className="text-amber-400 text-base">✨</span>
+              <span>{toastMessage}</span>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    // Mount Application
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
