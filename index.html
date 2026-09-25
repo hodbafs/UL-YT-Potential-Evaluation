@@ -339,37 +339,41 @@
     const { useState, useEffect, useMemo, useRef } = React;
 
     // ==========================================
-    // 1. DATA LAYER: 8 EVALUATORS + 1 ADMIN
+    // 1. DATA LAYER: 9 EVALUATORS + 1 ADMIN
     // STRICT PASSWORDS ONLY
     // ==========================================
     const EVALUATORS = [
-      { id: 'kanit', name: 'Kanit Seetong', email: 'kanit@bafs.co.th', password: 'bafsazKS2026', department: 'AZ', company: 'BAFS', role: 'Vice President / Head of AZ', assignedCount: 4 },
+      { id: 'kanit', name: 'Kanit Seetong', email: 'kanit@bafs.co.th', password: 'bafsazKS2026', department: 'AZ', company: 'BAFS', role: 'Vice President / Head of AZ', assignedCount: 5 },
       { id: 'theerata', name: 'Theerata Thornjaroensri', email: 'theerata@bafs.co.th', password: 'bafsfaTT2026', department: 'FA', company: 'BAFS', role: 'Head of FA', assignedCount: 2 },
       { id: 'rachanok', name: 'Rachanok Sa-nguansub', email: 'rachanok@bafs.co.th', password: 'bafshbRS2026', department: 'HZ', company: 'BAFS', role: 'Head of HZ', assignedCount: 1 },
-      { id: 'yuphadee', name: 'Yuphadee Tongaroonsri', email: 'yuphadee@bafs.co.th', password: 'bafsrzYT2026', department: 'RZ', company: 'BAFS', role: 'Head of RZ', assignedCount: 1 },
-      { id: 'narongsak', name: 'Narongsak Poonpanichuppatamp', email: 'narongsak.p@bpt.co.th', emailAlt: 'narongsak@bpt.co.th', password: 'bptmqNP2026', department: 'MD', company: 'BPT', role: 'Managing Director / Head of MD', assignedCount: 2 },
+      { id: 'yuphadee', name: 'Yuphadee Tongaroonsri', email: 'yuphadee@bafs.co.th', password: 'bafsrzYT2026', department: 'RZ', company: 'BAFS', role: 'Head of RZ', assignedCount: 2 },
+      { id: 'pich', name: 'Pich Phanomvan Na Ayudhya', email: 'pich@bafs.co.th', password: 'bafsmcPP2026', department: 'EM', company: 'BAFS', role: 'Executive Vice President / Head of EM', assignedCount: 2 },
+      { id: 'narongsak', name: 'Narongsak Poonpanichuppatamp', email: 'narongsak.p@bpt.co.th', emailAlt: 'narongsak@bpt.co.th', password: 'bptmqNP2026', department: 'MQ', company: 'BPT', role: 'Managing Director / Head of MQ', assignedCount: 2 },
       { id: 'worawee', name: 'Worawee Suriyathamrongkul', email: 'worawee.s@bpt.co.th', emailAlt: 'worawee@bpt.co.th', password: 'bpthzWS2026', department: 'HZ', company: 'BPT', role: 'Head of HZ (BPT)', assignedCount: 1 },
-      { id: 'winyu', name: 'Winyu Yongsuebchat', email: 'winyu.y@bpt.co.th', emailAlt: 'winyu@bpt.co.th', password: 'bptpzWY2026', department: 'PZ', company: 'BPT', role: 'Head of PZ', assignedCount: 1 },
-      { id: 'suwatchai', name: 'Suwatchai Patcharasaengthong', email: 'suwatchai.p@bpt.co.th', emailAlt: 'suwatchai@bpt.co.th', password: 'bptdzSP2026', department: 'DZ', company: 'BPT', role: 'Head of DZ', assignedCount: 2 },
-      { id: 'admin', name: 'Super Administrator', email: 'admin@bafs.co.th', password: 'admin2026', passwords: ['admin2026', 'admin2027', 'Admin#2027', 'admin#2027', 'Admin2026', 'Admin2027'], department: 'Talent Management', company: 'BAFS Group', role: 'Talent Management Administrator', assignedCount: 14, isAdmin: true }
+      { id: 'suwatchai', name: 'Suwatchai Patcharasaengthong', email: 'suwatchai.p@bpt.co.th', emailAlt: 'suwatchai@bpt.co.th', password: 'bptdzSP2026', department: 'DZ', company: 'BPT', role: 'Head of DZ', assignedCount: 1 },
+      { id: 'jade', name: 'Jade Tupiya', email: 'jade.t@bpt.co.th', emailAlt: 'jade@bpt.co.th', password: 'bptmdJT2026', department: 'BZ', company: 'BPT', role: 'Managing Director (BPT)', assignedCount: 1 },
+      { id: 'admin', name: 'Super Administrator', email: 'admin@bafs.co.th', password: 'admin2026', passwords: ['admin2026', 'admin2027', 'Admin#2027', 'admin#2027', 'Admin2026', 'Admin2027'], department: 'Talent Management', company: 'BAFS Group', role: 'Talent Management Administrator', assignedCount: 17, isAdmin: true }
     ];
 
-    // 14 Targeted Talents (ENGLISH NAMES ONLY - NO EMPLOYEE CODES - NO BULKY DESCRIPTIONS)
+    // 17 Targeted Talents (ENGLISH NAMES ONLY - NO EMPLOYEE CODES - NO BULKY DESCRIPTIONS)
     const CANDIDATES = [
       { id: 'cand_1', fullName: 'Chitakon Prasomsi', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 49, serviceYears: 23, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
       { id: 'cand_2', fullName: 'Pakasit Promnim', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 43, serviceYears: 16, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
       { id: 'cand_3', fullName: 'Veerawat Limphatcharaphon', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 41, serviceYears: 14, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
       { id: 'cand_4', fullName: 'Ladapha Siripodjanakorn', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 38, serviceYears: 3, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
-      { id: 'cand_5', fullName: 'Khwannapa Thongdonae', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 44, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
-      { id: 'cand_6', fullName: 'Thanawan Sanansongkram', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 31, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
-      { id: 'cand_7', fullName: 'Sangduan Tipworapong', department: 'HZ', departmentFull: 'ฝ่ายทรัพยากรบุคคล (HZ)', company: 'BAFS', age: 38, serviceYears: 15, assignedEvaluatorIds: ['rachanok', 'admin'], evaluatorEmail: 'rachanok@bafs.co.th' },
-      { id: 'cand_8', fullName: 'Atsadayuth Rodchaona', department: 'RZ', departmentFull: 'ฝ่ายวิจัยและนวัตกรรมธุรกิจ (RZ)', company: 'BAFS', age: 44, serviceYears: 13, assignedEvaluatorIds: ['yuphadee', 'admin'], evaluatorEmail: 'yuphadee@bafs.co.th' },
-      { id: 'cand_9', fullName: 'Panyamol Gradwong', department: 'MD', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MD)', company: 'BPT', age: 41, serviceYears: 12, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
-      { id: 'cand_10', fullName: 'Sununtha Phumsrithon', department: 'MD', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MD)', company: 'BPT', age: 35, serviceYears: 7, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
-      { id: 'cand_11', fullName: 'Kadsarin Inmano', department: 'HZ', departmentFull: 'ฝ่ายบริหารงานบุคคลและองค์กร (HZ)', company: 'BPT', age: 29, serviceYears: 4, assignedEvaluatorIds: ['worawee', 'admin'], evaluatorEmail: 'worawee.s@bpt.co.th', evaluatorEmailAlt: 'worawee@bpt.co.th' },
-      { id: 'cand_12', fullName: 'Pornthep KongKaew', department: 'PZ', departmentFull: 'ฝ่ายวิศวกรรมระบบท่อ (PZ)', company: 'BPT', age: 49, serviceYears: 27, assignedEvaluatorIds: ['winyu', 'admin'], evaluatorEmail: 'winyu.y@bpt.co.th', evaluatorEmailAlt: 'winyu@bpt.co.th' },
-      { id: 'cand_13', fullName: 'Warid Intachai', department: 'DZ', departmentFull: 'ฝ่ายควบคุมคลังน้ำมัน (DZ)', company: 'BPT', age: 43, serviceYears: 16, assignedEvaluatorIds: ['suwatchai', 'admin'], evaluatorEmail: 'suwatchai.p@bpt.co.th', evaluatorEmailAlt: 'suwatchai@bpt.co.th' },
-      { id: 'cand_14', fullName: 'Mongkol Weingsong', department: 'DZ', departmentFull: 'ฝ่ายควบคุมคลังน้ำมัน (DZ)', company: 'BPT', age: 39, serviceYears: 17, assignedEvaluatorIds: ['suwatchai', 'admin'], evaluatorEmail: 'suwatchai.p@bpt.co.th', evaluatorEmailAlt: 'suwatchai@bpt.co.th' }
+      { id: 'cand_5', fullName: 'Wisoot Changsawai', department: 'AZ', departmentFull: 'ฝ่ายปฏิบัติการเติมน้ำมันอากาศยาน (AZ)', company: 'BAFS', age: 48, serviceYears: 22, assignedEvaluatorIds: ['kanit', 'admin'], evaluatorEmail: 'kanit@bafs.co.th' },
+      { id: 'cand_6', fullName: 'Khwannapa Thongdonae', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 44, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
+      { id: 'cand_7', fullName: 'Thanawan Sanansongkram', department: 'FA', departmentFull: 'ฝ่ายบัญชีและการเงิน (FA)', company: 'BAFS', age: 31, serviceYears: 4, assignedEvaluatorIds: ['theerata', 'admin'], evaluatorEmail: 'theerata@bafs.co.th' },
+      { id: 'cand_8', fullName: 'Sirapassorn Pummali', department: 'HZ', departmentFull: 'ฝ่ายทรัพยากรบุคคล (HZ)', company: 'BAFS', age: 25, serviceYears: 2, assignedEvaluatorIds: ['rachanok', 'admin'], evaluatorEmail: 'rachanok@bafs.co.th' },
+      { id: 'cand_9', fullName: 'Piranathsak Duangdangchot', department: 'RZ', departmentFull: 'ฝ่ายวิจัยและนวัตกรรมธุรกิจ (RZ)', company: 'BAFS', age: 43, serviceYears: 19, assignedEvaluatorIds: ['yuphadee', 'admin'], evaluatorEmail: 'yuphadee@bafs.co.th' },
+      { id: 'cand_10', fullName: 'Thanin Sonthihom', department: 'RZ', departmentFull: 'ฝ่ายวิจัยและนวัตกรรมธุรกิจ (RZ)', company: 'BAFS', age: 45, serviceYears: 10, assignedEvaluatorIds: ['yuphadee', 'admin'], evaluatorEmail: 'yuphadee@bafs.co.th' },
+      { id: 'cand_11', fullName: 'Chariya Kasemsan Na Ayudhaya', department: 'EM', departmentFull: 'สำนักกรรมการผู้อำนวยการใหญ่และสื่อสารองค์กร (EM)', company: 'BAFS', age: 26, serviceYears: 3, assignedEvaluatorIds: ['pich', 'admin'], evaluatorEmail: 'pich@bafs.co.th' },
+      { id: 'cand_12', fullName: 'Porhatai Taravanich', department: 'EM', departmentFull: 'สำนักกรรมการผู้อำนวยการใหญ่และสื่อสารองค์กร (EM)', company: 'BAFS', age: 48, serviceYears: 3, assignedEvaluatorIds: ['pich', 'admin'], evaluatorEmail: 'pich@bafs.co.th' },
+      { id: 'cand_13', fullName: 'Panyamol Gradwong', department: 'MQ', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MQ)', company: 'BPT', age: 41, serviceYears: 12, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
+      { id: 'cand_14', fullName: 'Sununtha Phumsrithon', department: 'MQ', departmentFull: 'ฝ่ายบริหารและพัฒนาธุรกิจ (MQ)', company: 'BPT', age: 35, serviceYears: 7, assignedEvaluatorIds: ['narongsak', 'admin'], evaluatorEmail: 'narongsak.p@bpt.co.th', evaluatorEmailAlt: 'narongsak@bpt.co.th' },
+      { id: 'cand_15', fullName: 'Kadsarin Inmano', department: 'HZ', departmentFull: 'ฝ่ายบริหารงานบุคคลและองค์กร (HZ)', company: 'BPT', age: 29, serviceYears: 4, assignedEvaluatorIds: ['worawee', 'admin'], evaluatorEmail: 'worawee.s@bpt.co.th', evaluatorEmailAlt: 'worawee@bpt.co.th' },
+      { id: 'cand_16', fullName: 'Warid Intachai', department: 'DZ', departmentFull: 'ฝ่ายควบคุมคลังน้ำมัน (DZ)', company: 'BPT', age: 43, serviceYears: 16, assignedEvaluatorIds: ['suwatchai', 'admin'], evaluatorEmail: 'suwatchai.p@bpt.co.th', evaluatorEmailAlt: 'suwatchai@bpt.co.th' },
+      { id: 'cand_17', fullName: 'Tanach Shingrissiri', department: 'BZ', departmentFull: 'ฝ่ายบริหารและปฏิบัติการ (BZ)', company: 'BPT', age: 45, serviceYears: 19, assignedEvaluatorIds: ['jade', 'admin'], evaluatorEmail: 'jade.t@bpt.co.th', evaluatorEmailAlt: 'jade@bpt.co.th' }
     ];
 
     // =========================================================================
@@ -617,9 +621,6 @@
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs font-black px-3.5 py-1.5 rounded-xl bg-amber-400/25 text-amber-300 border border-amber-400/50 whitespace-nowrap shadow-xs">
                           {candidate.company} • {candidate.department}
-                        </span>
-                        <span className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-slate-950/80 text-white border border-white/20 whitespace-nowrap shadow-xs">
-                          {candidate.departmentFull}
                         </span>
                         <span className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-slate-950/80 text-slate-100 border border-white/20 whitespace-nowrap shadow-xs">
                           อายุ {candidate.age} ปี • อายุงาน {candidate.serviceYears} ปี
@@ -927,7 +928,7 @@
                   {candidate.fullName}
                 </h3>
                 <p className="text-xs text-slate-400">
-                  {candidate.departmentFull}
+                  อายุ {candidate.age} ปี • อายุงาน {candidate.serviceYears} ปี
                 </p>
               </div>
               <button
@@ -1569,7 +1570,7 @@
           return;
         }
 
-        if (!window.confirm('⚠️ คำเตือน: ท่านต้องการรีเซ็ตผลการประเมินของผู้รับการประเมินทั้งหมด (14 ท่าน) เพื่อทดสอบระบบใหม่ใช่หรือไม่?\n\nคะแนนทั้งหมดใน Google Sheets จะถูกล้างออกและปลดล็อคทุกท่าน')) {
+        if (!window.confirm(`⚠️ คำเตือน: ท่านต้องการรีเซ็ตผลการประเมินของผู้รับการประเมินทั้งหมด (${CANDIDATES.length} ท่าน) เพื่อทดสอบระบบใหม่ใช่หรือไม่?\n\nคะแนนทั้งหมดใน Google Sheets จะถูกล้างออกและปลดล็อคทุกท่าน`)) {
           return;
         }
 
@@ -1596,7 +1597,7 @@
                 evaluatorName: currentUser ? currentUser.name : 'Admin'
               })
             });
-            showToast('รีเซ็ตข้อมูลทั้งหมด 14 ท่านเรียบร้อยแล้ว');
+            showToast(`รีเซ็ตข้อมูลทั้งหมด ${CANDIDATES.length} ท่านเรียบร้อยแล้ว`);
             setTimeout(() => {
               syncCloudEvaluations(true);
             }, 800);
@@ -1868,15 +1869,7 @@
                       {focusedCandidate.company} • {focusedCandidate.department}
                     </span>
 
-                    {/* Badge 2: Full Department Name (VisionOS Frosted Azure Capsule with Specular Rim) */}
-                    <span className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-950/70 via-slate-900/85 to-slate-950/95 border border-sky-500/30 border-t-sky-300/70 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(2,132,199,0.35),inset_0_1px_1px_rgba(255,255,255,0.15)] whitespace-nowrap">
-                      <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.9)] animate-pulse"></span>
-                      <span className="text-xs sm:text-[13px] font-bold text-sky-100 tracking-wide">
-                        {focusedCandidate.departmentFull}
-                      </span>
-                    </span>
-
-                    {/* Badge 3: Demographics & Service Years (Frosted Champagne Metric Capsule) */}
+                    {/* Badge 2: Demographics & Service Years (Frosted Champagne Metric Capsule) */}
                     <span className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-900/85 via-amber-950/30 to-slate-950/95 border border-amber-400/30 border-t-amber-300/70 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(245,158,11,0.25),inset_0_1px_1px_rgba(255,255,255,0.15)] whitespace-nowrap text-xs sm:text-[13px] text-slate-200 font-medium">
                       <span>อายุ <strong className="font-black text-amber-300 font-mono text-sm tracking-tight">{focusedCandidate.age}</strong> ปี</span>
                       <span className="text-amber-400/40 text-xs">•</span>
@@ -1983,7 +1976,7 @@
               <div className="space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
-                    <h2 className="text-xl font-black text-white">ภาพรวมผลการประเมินศักยภาพ (14 ท่าน)</h2>
+                    <h2 className="text-xl font-black text-white">ภาพรวมผลการประเมินศักยภาพ ({CANDIDATES.length} ท่าน)</h2>
                     <p className="text-xs text-slate-300">
                       ตรวจสอบคะแนน, ดูผลการวิเคราะห์ระดับศักยภาพ และสามารถรีเซ็ตข้อมูลเพื่อทดสอบใหม่ได้
                     </p>
@@ -1992,7 +1985,7 @@
                     <button
                       onClick={handleResetAllEvaluations}
                       className="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-sm"
-                      title="ล้างคะแนนทั้งหมด 14 ท่านใน Google Sheets เพื่อทดสอบระบบใหม่"
+                      title={`ล้างคะแนนทั้งหมด ${CANDIDATES.length} ท่านใน Google Sheets เพื่อทดสอบระบบใหม่`}
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -2034,9 +2027,8 @@
                                 <div className="font-bold text-white text-sm">{cand.fullName}</div>
                                 <div className="text-[11px] text-slate-400">อายุ {cand.age} ปี • อายุงาน {cand.serviceYears} ปี</div>
                               </td>
-                              <td className="p-4">
-                                <span className="font-semibold text-slate-200">{cand.company}</span> • {cand.department}
-                                <div className="text-[10px] text-slate-400">{cand.departmentFull}</div>
+                              <td className="p-4 whitespace-nowrap">
+                                <span className="font-semibold text-slate-200">{cand.company}</span> • <span className="text-amber-300 font-bold">{cand.department}</span>
                               </td>
                               <td className="p-4">
                                 {isDone ? (
@@ -2157,8 +2149,8 @@
                               <h4 className="text-xs sm:text-sm font-black text-white truncate whitespace-nowrap">
                                 {cand.fullName}
                               </h4>
-                              <p className="text-[11px] text-slate-300 font-medium truncate whitespace-nowrap">
-                                {cand.departmentFull}
+                              <p className="text-[11px] text-slate-400 font-medium truncate whitespace-nowrap">
+                                อายุ {cand.age} ปี • อายุงาน {cand.serviceYears} ปี
                               </p>
                             </div>
                           </div>
@@ -2206,8 +2198,8 @@
                               <h4 className="text-xs sm:text-sm font-black text-white truncate whitespace-nowrap">
                                 {cand.fullName}
                               </h4>
-                              <p className="text-[11px] text-slate-300 font-medium truncate whitespace-nowrap">
-                                {cand.departmentFull}
+                              <p className="text-[11px] text-slate-400 font-medium truncate whitespace-nowrap">
+                                อายุ {cand.age} ปี • อายุงาน {cand.serviceYears} ปี
                               </p>
                             </div>
                           </div>
